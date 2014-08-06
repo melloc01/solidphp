@@ -184,7 +184,10 @@ class LoopControl
 
 
 		/**
-		 * function init initializes the control variables
+		 * 	function init 
+		 *	
+		 *		initializes the control variables
+		 *	
 		 */
 		public function init()
 		{
@@ -192,8 +195,9 @@ class LoopControl
 			if (file_exists(ADMIN."$_class/model/{$_class}.class.php")) {
 				$model_name = $this->getClassName().'_model';
 				$this->Model = new $model_name();
-				$this->Form = new Form($this->getClassName());
 			}
+			if (ON_ADMIN)
+				$this->Form = new Form($this->getClassName());
 			$this->system_requires();
 			$this->redirectURL = $this->getFullurl();		
 			$this->actionForms = $this->getActionForms();	

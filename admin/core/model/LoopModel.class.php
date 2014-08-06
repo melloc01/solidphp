@@ -8,50 +8,23 @@ class LoopModel
 	private $Util;
 
 	function __construct()
-	{
-		$this->init();
-		try {
-			$this->db = Conexao::getInstance();
-		} catch (Exception $e) {
-			$this->db = Conexao::getInstanceNoDB();
-			$this->table = 'no_db';
-		}
+	{		
+		$aux = explode('_model', get_class($this));
+		$this->table = $aux[0];
+		$this->Util = new Util();
 		$this->setLimit();
 	}
 	
-	public function getLastInsertId()
+	public function connect()
 	{
+		$this->db = Conexao::getInstance();
+	}
+
+	public function getLastInsertId()
+	{	
+		$this->connect();
 		return $this->db->lastInsertId();
 	}
-
-	public function getClassName()
-	{
-		$aux = explode("_", get_class($this));
-		$classname ="";
-		$i=2;
-		foreach ($aux as $key => $parte_explode) {
-			if ($parte_explode != end($aux)) {
-				$classname .= $parte_explode;
-				if (count($aux)> $i ) {
-					$classname .="_";
-				}
-				$i++;
-			}
-		}
-		return $classname;
-	}
-	
-	public function init()
-	{
-		$this->table = $this->getClassName();
-		require_once ADMIN."core/util/util.class.php";
-		$this->Util = new Util();
-	}
-
-	public function addModel($model_name)
-	{
-		require_once(ADMIN."$model_name/model/{$model_name}.class.php");
-	}		
 
 	public function getRegistroPlusFKROWS($idRow, $table = false)
 	{
@@ -73,6 +46,7 @@ class LoopModel
 
 	public function runSQL_unique($sql)
 	{
+		$this->connect();
 		$dbStatment = $this->db->prepare($sql);
 
 		if($dbStatment->execute() && $dbStatment->rowCount() != 0)
@@ -83,6 +57,7 @@ class LoopModel
 
 	public function runSQL($sql)
 	{
+		$this->connect();
 		$dbStatment = $this->db->prepare($sql);
 		$dbStatment->execute();
 
@@ -104,6 +79,7 @@ class LoopModel
 	 */
 	public function runQuery($sql)
 	{
+		$this->connect();
 		$dbStatment = $this->db->prepare($sql);
 		if ($dbStatment->execute()){
 			return true;
@@ -125,8 +101,9 @@ class LoopModel
 	 */
 	public function runPDOQuery($sql, $param_array)
 	{
+		$this->connect();
 		$dbStatment = $this->db->prepare($sql);
-		if ($dbStatment->execute($param_array)){
+		if ($dbStatment->execute($param_array)){  //PDO method
 			return true;
 		} else {
 			$error = $dbStatment->errorInfo();
@@ -435,8 +412,7 @@ public function submit_update($historico=false,$chave="id",$id = 0)
 	$sql = $update.$where.";";
 	$sql = str_replace(",w", "w", $sql);
 
-	$dbStatment = $this->db->prepare($sql);
-	if($dbStatment->execute()){
+	if($this->runQuery($sql)){
 		if ($historico) {
 			$registro = $this->getRegistro($id);
 			$str="|";

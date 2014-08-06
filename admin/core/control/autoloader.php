@@ -20,6 +20,11 @@
 		if (file_exists(ADMIN. "core/model/$DIR_NAME.class.php")) {
 			require(ADMIN. "core/model/$DIR_NAME.class.php");return;
 		}
+		
+		if (file_exists(ADMIN. "core/util/$DIR_NAME.class.php")) {
+			require(ADMIN. "core/util/$DIR_NAME.class.php");return;
+		}
+
 		$aux = explode('_', $pClassName);
 		$DIR_NAME = $aux[0];
 
