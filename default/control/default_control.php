@@ -4,7 +4,7 @@ class default_control extends LoopControl
 
 	public function __construct()
 	{
-		Kint::dump($_GET);
+		parent::construct('');
 	}
 
 	public function home()
