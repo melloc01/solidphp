@@ -4,7 +4,7 @@ class default_control extends LoopControl
 
 	public function __construct()
 	{
-		parent::construct('');
+		parent::__construct('');
 	}
 
 	public function home()
