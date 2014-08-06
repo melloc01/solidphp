@@ -116,8 +116,8 @@ class __construct_control extends LoopControl
 
 			$insert_access_tool = array(
 				'name' => $table,
-				'code' => $table,
-				'table_name' => $ferramenta,
+				'code' => $ferramenta,
+				'table_name' => $table,
 				'description' => "Permissão para Cadastrar/Alterar/Remover cadastros de {$table}s.) "
 			);
 
