@@ -1,5 +1,5 @@
 		<li>
-			<a href="./admin"><i class="fa fa-dashboard fa-fw"></i> <b><small>Painel Inicial</small></b></a>
+			<a href="./"><i class="fa fa-dashboard fa-fw"></i> <b><small>Painel Inicial</small></b></a>
 		</li>
 
 		<?

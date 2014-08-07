@@ -371,5 +371,13 @@
 				}
 				// var_dump($this->custom_inputs);
 			}
+			
+			public function hasColumn($column)
+			{
+				foreach ($this->colunas as $key => $coluna) {
+					if ($coluna['Field'] == $column) return true;
+				}
+				return false;
+			}
 		}
 ?>

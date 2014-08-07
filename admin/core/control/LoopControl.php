@@ -74,17 +74,6 @@ class LoopControl
 		/**
 		* @param string : site_title  - title of the site ( inside <head> </head> on templatehead) 
 		*/			
-		$site_title = "Site",
-
-		/**
-		* @param formatted string array $list_title
-		*				Prefixing the array element with # the control won't try to  fetch the attribute value of the register  
-		* 				it will just output what's after the #, as you know in PHP multi-array arrived from database can be accessed
-		* 				by number or name of the column.
-		*		the way it's defined  here it gets the second column value and prints nothing
-		*/			
-		$list_title = array("1","#"),
-		
 
 		$project_name = 'LitePHP',
 
@@ -117,6 +106,9 @@ class LoopControl
 	    */	
 		$icon = 'fa-paperclip';
 
+		private 
+			$site_title = "Site";
+
 
 		function __construct($tool="")
 		{	
@@ -131,6 +123,17 @@ class LoopControl
 		{
 			output_add_rewrite_var($var, $value);
 		}
+
+		public function setSiteTitle($value)
+		{
+			$this->site_title = $value;
+		}
+
+		public function getSiteTitle()
+		{
+			$this->site_title;
+		}
+
 
 
 		/**

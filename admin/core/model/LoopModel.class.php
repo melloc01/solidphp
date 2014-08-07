@@ -184,10 +184,31 @@ class LoopModel
 	}
 
 	/* trata insercao de quando existe _GET['cad']*/
-	public function submit_insert($historico=false, $msg="Registro inserido com sucesso")
+	
+		public function submit_insert($historico=false, $uploaddir = null )
 	{
 		$tabelas[] = array();
 		$control_variables = array("l","sl","ins");
+		$uploaddir = $uploaddir == null ? "../$this->table/uploads/" : $uploaddir;
+
+		if ($_FILES) {
+			if ( $uploaddir == "../$this->table/uploads/" ) 
+				if ( !is_dir("../$this->table/uploads/") ){
+					mkdir("../$this->table");
+					mkdir("../$this->table/uploads");
+				}
+			$i=1;
+			foreach ($_FILES as $key => $FILE) {
+				if ( ($FILE['name'] != "") && ($FILE['name'] != array("")) ) { //foi upado
+					$extensao = explode('.', $FILE['name']) ;
+					$extensao = $extensao[1];
+					$nome_arquivo = $this->Util->hashNameGenerator().".$extensao";
+					$_POST[$key] = $nome_arquivo;
+					$move = move_uploaded_file($FILE['tmp_name'], "{$uploaddir}{$nome_arquivo}");
+					// $i++;
+				}
+			}
+		}
 		 //getting all tables involved in the submit action
 		foreach ($_POST as $key => $value) {
 			if (!in_array($key, $control_variables)) {
@@ -236,26 +257,14 @@ class LoopModel
 			return $this->runQuery($sql);
 			
 		}
-
-		if ($_FILES) {
-			$uploaddir="./$this->table/uploads/";
-			$i=1;
-			foreach ($_FILES as $key => $FILE) {
-				if ( ($FILE['name'] != "") && ($FILE['name'] != array("")) ) { //foi upado
-					$extensao = explode('.', $FILE['name']) ;
-					$extensao = $extensao[1];
-					$nome_arquivo = $this->table."_".$next_id."_img_".$i.".".$extensao;
-					move_uploaded_file($FILE['tmp_name'], $uploaddir . $nome_arquivo);
-					// $i++;
-				}
-			}
-		}	
+	
 	}
 	if ($historico) {
 		$this->addHistorico('Inserção',$this->table,$next_id,$sql);
 	}
 	return true;
 }
+
 
 public function submit_remove($historico=false)
 {
