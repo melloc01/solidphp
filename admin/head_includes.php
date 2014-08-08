@@ -7,3 +7,5 @@
 <link href="../plugins/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="core/css/default.css" rel="stylesheet">
 <script type="text/javascript" src="core/js/respond.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../plugins/summernote/summernote.css">
+<link rel="stylesheet" type="text/css" href="../plugins/datetimepicker/jquery.datetimepicker.css">

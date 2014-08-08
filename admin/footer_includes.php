@@ -4,10 +4,6 @@
 <script src="core/js/default.js" type="text/javascript" charset="utf-8"></script>
 <!-- <script src="./core/js/fastdom/index.js" type="text/javascript" charset="utf-8" async defer></script> -->
 <script src="../plugins/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8" ></script>
-
-
-
-<link rel="stylesheet" type="text/css" href="../plugins/summernote/summernote.css">
 <script src="../plugins/summernote/summernote.min.js" type="text/javascript" charset="utf-8"  ></script>
 <script>
   $('.ckeditor').summernote({
@@ -15,7 +11,6 @@
   });
 </script>
 
-<link rel="stylesheet" type="text/css" href="../plugins/datetimepicker/jquery.datetimepicker.css">
 
 <script>
  /* jquery.datepicker inits */
