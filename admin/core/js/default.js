@@ -1,16 +1,11 @@
 
-//Loads the correct sidebar on window load,
-//collapses the sidebar on window resize.
-$(function() {
-	$(window).bind("load resize", function() {
-		console.log($(this).width());
-		if ($(this).width() < 768) {
-			$('div.sidebar-collapse').addClass('collapse')
-		} else {
-			$('div.sidebar-collapse').removeClass('collapse')
-		}
-	})
-});
+var body = document.body,
+    html = document.documentElement;
+
+var doc_height = Math.max( body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+$(".sidebar").css('height',doc_height);
 
 $(document).ready(function() {	
 	getNewsAjax('http://feeds.folha.uol.com.br/emcimadahora/rss091.xml','folhaNews');

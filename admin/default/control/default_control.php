@@ -17,10 +17,15 @@
 class default_control extends LoopControl
 {
 	var $registros;
+	public function __construct()
+	{
+		$this->icon = 'fa-dashboard';
+		parent::__construct('');
+	}
 
 	public function home()
 	{
-		$this->setPageTitle("CasaControle");
+		$this->setPageTitle("Painel do Usuário");
 		$this->render(ADMIN."default/view/home.php", get_defined_vars());
 	}
 

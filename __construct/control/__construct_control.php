@@ -22,7 +22,7 @@ class __construct_control extends LoopControl
 				foreach ($_tables as $key => $table) 
 					if (!in_array($table[0], $this->system_tables)) 
 						array_push($this->db_tables, $table[0]);
-
+				$this->setSiteTitle('Solid - __construct ');
 				$this->render(ROOT."__construct/view/home.php",get_defined_vars());
 				
 			} catch (Exception $e) {

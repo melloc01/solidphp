@@ -109,7 +109,7 @@ class LoopControl
 			$httpRequest ;
 
 		private 
-			$site_title = "Site";
+			$site_title ;
 
 
 		function __construct($tool="")
@@ -126,8 +126,15 @@ class LoopControl
 			output_add_rewrite_var($var, $value);
 		}
 
-		public function setSiteTitle($value)
+		public function setSiteTitle($value = null)
 		{
+			$_class = $this->getClassName();
+			if ($value == null) 
+				if ($_class == 'default')
+						if(ON_ADMIN)  $value =  "Solid - Control Panel ";
+					else $value = "Solid";
+				else 
+					$value = "Solid - ".ucfirst($_class);
 			$this->site_title = $value;
 		}
 
@@ -135,8 +142,6 @@ class LoopControl
 		{
 			$this->site_title;
 		}
-
-
 
 		/**
 		 * function breakpoint :
@@ -206,6 +211,7 @@ class LoopControl
 			$this->system_requires();
 			$this->redirectURL = $this->getFullurl();		
 			$this->setNotifications();
+			$this->setSiteTitle();
 		}
 
 		/**
@@ -256,9 +262,9 @@ class LoopControl
 		public function include_head()
 		{
 			if ($this->hasHeader) {
-				include_once(CURRENT_BASE."template_head.php");
+				include_once(CURRENT_BASE."partials/template_head.php");
 			} else{
-				include_once(CURRENT_BASE."HTML_head_includes.php");
+				include_once(CURRENT_BASE."partials/HTML_head_includes.php");
 			}
 		}
 
@@ -270,9 +276,9 @@ class LoopControl
 		public function include_footer()
 		{
 			if ($this->hasFooter) {
-				include_once(CURRENT_BASE."template_footer.php");	
+				include_once(CURRENT_BASE."partials/template_footer.php");	
 			} else{
-				include_once(CURRENT_BASE."footer_includes.php");	
+				include_once(CURRENT_BASE."partials/footer_includes.php");	
 			}
 		}
 
@@ -352,9 +358,9 @@ class LoopControl
 
 		public function dispatchErrors()
 		{
-			if ( $this->debug && isset($_SESSION['error'])){
-				$_SESSION['mysql_error'] = $_SESSION['error'] ;
-				unset($_SESSION['error']);
+			if ( !$this->debug && isset($_SESSION['mysql_error'])){
+				unset($_SESSION['mysql_error']);
+				$_SESSION['system_danger'] = $this->danger_notification;
 			} 
 			else {
 				$_SESSION['system_danger'] = $this->danger_notification;
@@ -393,7 +399,7 @@ class LoopControl
 					$_SESSION['system_info'] = $this->published_notification;
 				else 
 					$this->dispatchErrors();
-				$this->movePermanently();
+				$this->movePermanently('./');
 			}
 		}
 

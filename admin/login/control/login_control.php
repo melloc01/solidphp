@@ -45,9 +45,11 @@ class login_control extends LoopControl
 
 		$registro = $user_model->getRegistro($_POST["user"],'login');
 
+		// Kint::dump(!empty($registro) && $this->checkCryptPassword($_POST["pass"],$registro['password']));
+
 		if( !empty($registro) && $this->checkCryptPassword($_POST["pass"],$registro['password']) ){
 			$this->buildSession($registro);
-			$this->movePermanently('./');
+			$this->movePermanently('../');
 			return true;
 		}
 		else{

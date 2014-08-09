@@ -50,3 +50,9 @@
 
 ?>
 </div>
+
+<script type="text/javascript">
+	setTimeout(function() {
+		$("#ctSysMsg").slideUp();
+	},1000);
+</script>

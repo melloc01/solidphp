@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Solid - No Database constants</title>
+	<?php  
+		$aux = explode('/',$_SERVER['REQUEST_URI']);
+		$project = $aux[1];
+	?>
+	<base href='http://localhost/<?php echo $project ?>/' />
+	<link rel="stylesheet" type="text/css" href="plugins/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3 " style="margin-top:100px">
+			<h1 >Welcome to Solid </h1>
+			<h4>Hmmm.. seems you didn't define your personal constants yet.</h4>
+			<br>
+			<br>
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong>Attention!</strong>  - You must specify some database_constants</h3>
+				</div>
+				<div class="panel-body">
+					<p>
+						Check <b><code>/admin/core/util/system_constants.php.dist</code></b><br><br> 
+						Rename it to <b><code>system_constants.php</code></b> part and fill it with your database info. <br><br> 
+
+						<div class="alert alert-warning">
+							<span class="glyphicon glyphicon-exclamation-sign"></span> &nbsp; The renamed file is on  .gitignore.
+						</div>
+						<div class="alert alert-info">
+							<span class="glyphicon glyphicon-info-sign"></span> &nbsp; If your project is static, don't worry, just rename the file and you're done.
+						</div>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

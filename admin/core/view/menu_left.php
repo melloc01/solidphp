@@ -41,7 +41,7 @@
 		if ($_SESSION['admin']['access']['_his']) {?>
 		<li class=" item<?php if (isset($_GET['l']) && $_GET['l']=="history") {echo "_selected";}?>">
 			<a href="history" title="Configurações">
-				<i class="fa fa-bar-chart-o fa-fw"></i> Histórico
+				<i class="fa fa-save fa-fw"></i> Histórico
 			</a>
 			<?php if (isset($_GET['l']) && $_GET['l']=="history") {echo "<div class='arrow-left'></div>";}?>
 		</li>

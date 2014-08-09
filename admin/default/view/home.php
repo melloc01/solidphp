@@ -1,3 +1,7 @@
+<?php  
+	require(ADMIN."core/view/titulo_pagina.php");
+?>
+
 <div class="col-sm-12 bs3-panel ">
 	<div class="row">
 		<div  class="col-sm-6  ">

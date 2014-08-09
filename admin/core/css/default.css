@@ -1,4 +1,10 @@
-
+body,html{
+    margin: 0;
+    padding: 0;
+}
+.sidebar{
+    margin-top: -1px !important;
+}
 .ctInputGroup{
     margin: 15px 0;
 }
@@ -75,7 +81,7 @@ header{
     height: 30px;
     width: 40px;
     position: fixed;
-    top: 7px; left: 20px;
+    top: 15px; left: 15px;
     z-index: 10;
 }
 #menuToggle div{
@@ -98,18 +104,19 @@ header{
     .esconde_mobile{
         display: none !important;
     }
+    .sidebar h3{ margin-top : 15px;}
     #menu{
         display: none;
     }
     .sidebar{
         display: table;
         position: fixed;
-        height: 40px;
+        height: 60px !important;
         width: 100%;
         z-index: 100;
     }
     #content{
-        padding-top: 120px;
+        padding-top: 60px;
     }
 }
 @media (min-width: 768px) {
@@ -162,7 +169,6 @@ header{
 .default-table th {
     background: #f9f9f9;
 }
-
 
 .menuLeftMobile{
     position: fixed;

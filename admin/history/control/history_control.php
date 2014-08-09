@@ -11,6 +11,7 @@ class history_control extends LoopControl
 
 	public function __construct($tool="_his")
 	{
+		$this->icon = 'fa-save';
 		parent::__construct($tool);
 	}
 

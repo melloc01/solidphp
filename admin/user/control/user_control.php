@@ -24,9 +24,8 @@ class user_control extends LoopControl
 		if (isset($_POST['del'])) 
 			if ($_POST['del'] == 1) {
 				$_SESSION['system_danger'] = "Esse usuário não pode ser removido por esta ferramenta";
-				$this->movePermanently('./user');
+				$this->movePermanently('./');
 			}
-			$this->actionForms = './';
 		
 		parent::submit();
 	}
@@ -43,7 +42,7 @@ class user_control extends LoopControl
 		$this->list_cells = array("{{login}}");	
 
 		$this->no_controls_lista = array(); //inicializa 
-		$this->registros =  $this->Model->getRegistros();
+		$this->registros =  $this->Model->getRegistros(" id <> {$_SESSION['admin']['user']['id']} ");
 
 		$this->setPageTitle("Usuários");
 		$this->render(ADMIN."core/view/lista.php",get_defined_vars());

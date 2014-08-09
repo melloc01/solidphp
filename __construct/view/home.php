@@ -7,7 +7,7 @@
 <div style="width:1280px; min-height:600px; margin:50px auto; ">
 
 
-<h1 class="text-center ">LitePHP Builder</h1>
+<h1 class="text-center ">Solid Builder</h1>
 <table class="table table-bordered table-hover" >
 	<tr class="info">
 		<td>
