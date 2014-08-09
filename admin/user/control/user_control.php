@@ -9,7 +9,7 @@ class user_control extends LoopControl
 	$list_headers,
 	$list_cells;
 
-	public function __construct($tool="_user")
+	public function __construct($tool="_use")
 	{
 		parent::__construct($tool);
 		$this->Form->setMasks(array("fkaccess_level" => "Nível de acesso", 'password' => 'Senha','login' => 'Login'));
