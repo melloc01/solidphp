@@ -153,6 +153,11 @@ header{
     left: 0;
     width: 100%;
     z-index: 999;
+    -webkit-transition: all .75s ease-out;
+       -moz-transition: all .75s ease-out;
+        -ms-transition: all .75s ease-out;
+         -o-transition: all .75s ease-out;
+            transition: all .75s ease-out;
 }
 .ctPureMessages{
     margin-top: 10%;

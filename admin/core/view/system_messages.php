@@ -59,6 +59,11 @@
 ?>
 <script type="text/javascript">
 	setTimeout(function() {
-		$("#ctSysMsg").slideUp(750);
+		$("#ctSysMsg").css({
+			top: '-55px'
+		})
+		setTimeout(function() {
+			$("#ctSysMsg").remove();
+		},750);
 	},<?php echo $message_time ?>);
 </script>
