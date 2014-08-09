@@ -9,31 +9,51 @@ require 'autoloader.php';
 
 class Application
 {
+	public $httpRequest ;
+
 	function __construct()
 	{
+		$request  = new HttpRequest();
+		if (ON_ADMIN)
+			$request->setBaseUrl('/'.PROJECT_NAME.'/admin/');
+		else 
+			$request->setBaseUrl('/'.PROJECT_NAME.'/');
+
+		$this->httpRequest = $request->createRequest();
 		$this->route();
+
+		Kint::dump($this->httpRequest);
 	}
 
 	public function route()
 	{
+		
+		$controllerName = $this->httpRequest->getControllerClassName();
+		$action = $this->httpRequest->getActionName();
+
 		if (!ON_ADMIN || isset($_SESSION['admin'])  ) {
-			if (isset($_GET["l"]) && $_GET["l"] != ''){ 
-				if (file_exists($_GET["l"]."/control/".$_GET["l"]."_control.php")){
-					include_once($_GET["l"]."/control/".$_GET["l"]."_control.php"); 
-					$control = $_GET["l"]."_control";
+			if ($controllerName != 'default'){ 
+				if (file_exists($controllerName."/control/".$controllerName."_control.php")){
+					include_once($controllerName."/control/".$controllerName."_control.php"); 
+					$control = $controllerName."_control";
 					$control_object = new $control; // instancia o control de 'l'
+					$control_object->httpRequest = $this->httpRequest;
 					$control_object->route();
 				} else {
-					$_GET['sl'] = $_GET['l'];
+					//make default_control possibilty to be called by /project/method 
+					$this->httpRequest->setActionName($controllerName);
 					$control = $this->newDefaultControl();
+					$control->httpRequest = $this->httpRequest;
 					$control->route();
 				}
 			} else {
 				$control = $this->newDefaultControl();
+				$control->httpRequest = $this->httpRequest;
 				$control->route();
 			}
 		} else {
 			$control = $this->newLoginControl();
+			$control->httpRequest = $this->httpRequest;
 			$control->route();
 		}
 	}

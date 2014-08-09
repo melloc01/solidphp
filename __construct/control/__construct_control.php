@@ -160,11 +160,11 @@ class __construct_control extends LoopControl
 class '.$table.'_control extends LoopControl
 {
 	public 	$registros,
-	$Form, 
-	$Model, 
-	$no_controls_lista,
-	$list_headers,
-	$list_cells;
+			$Form, 
+			$Model, 
+			$no_controls_lista,
+			$list_headers,
+			$list_cells;
 
 	public function __construct($tool="'.$ferramenta.'")
 	{
@@ -192,7 +192,7 @@ class '.$table.'_control extends LoopControl
 	}
 
 
-	public function editar()
+	public function edit()
 	{
 		$registro = $this->Model->getRegistro($_GET["id"],"id");
 		$this->setPageTitle("Editar '.$table.'");
@@ -201,7 +201,7 @@ class '.$table.'_control extends LoopControl
 		$this->render(ADMIN."core/view/editar.php",get_defined_vars());
 	}
 
-	public function novo()
+	public function create()
 	{
 		$this->setPageTitle("Novo '.$table.'");
 		$this->Form->setInputs();

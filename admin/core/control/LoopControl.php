@@ -106,6 +106,11 @@ class LoopControl
 	    */	
 		$icon = 'fa-paperclip';
 
+
+
+		public 
+			$httpRequest ;
+
 		private 
 			$site_title = "Site";
 
@@ -269,12 +274,10 @@ class LoopControl
 
 		public function include_head()
 		{
-			if (RENDER_LAYOUT) {
-				if ($this->hasHeader) {
-					include_once(CURRENT_BASE."template_head.php");
-				} else{
-					include_once(CURRENT_BASE."HTML_head_includes.php");
-				}
+			if ($this->hasHeader) {
+				include_once(CURRENT_BASE."template_head.php");
+			} else{
+				include_once(CURRENT_BASE."HTML_head_includes.php");
 			}
 		}
 
@@ -285,12 +288,10 @@ class LoopControl
 		
 		public function include_footer()
 		{
-			if (RENDER_LAYOUT) {
-				if ($this->hasFooter) {
-					include_once(CURRENT_BASE."template_footer.php");	
-				} else{
-					include_once(CURRENT_BASE."footer_includes.php");	
-				}
+			if ($this->hasFooter) {
+				include_once(CURRENT_BASE."template_footer.php");	
+			} else{
+				include_once(CURRENT_BASE."footer_includes.php");	
 			}
 		}
 
@@ -311,19 +312,14 @@ class LoopControl
 
 		public function route()
 		{
-			if (!defined("AJAX_CONTEXT") && ENABLE_ROUTE ) {
-				if (isset($_GET["sl"])) {
-					$sl = $_GET["sl"];
-					if (method_exists($this, $sl)){
-						$this->$sl();
-					}
-					else{
-						$this->renderPure(CURRENT_BASE.'core/view/404.html',get_defined_vars());
-					}
-				} else {
-					$this->home();
-				}			
+			$action = $this->httpRequest->getActionName();
+			if (method_exists($this, $action)){
+				$this->httpRequest = $this->httpRequest->createRequest(); //flush request || default_control behavior
+				$this->$action();
 			}
+			else{
+				$this->renderPure(CURRENT_BASE.'core/view/404.html',get_defined_vars());
+			}	
 		}
 
 		public function render($file_location, $defined_vars = null)

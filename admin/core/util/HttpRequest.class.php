@@ -7,9 +7,25 @@ class HttpRequest
     const CONTROLLER_CLASSNAME = 'default';
 
     /**
+     * default ACTION
+     */
+    const ACTION_NAME = 'home';
+
+    /**
      * position of controller
      */
     protected $controllerkey = 0;
+
+    /**
+     * position of controller
+     */
+    protected $actionkey = 1;
+
+
+    /**
+     * position of controller
+     */
+    protected $actionvaluekey = 2;
 
     /**
      * site base url
@@ -22,6 +38,16 @@ class HttpRequest
     protected $controllerClassName;
 
     /**
+     * current action  name
+     */
+    protected $actionName;
+
+    /**
+     * current action  value
+     */
+    protected $actionValue;
+
+    /**
      * list of all parameters $_GET and $_POST
      */
     protected $parameters;
@@ -30,6 +56,7 @@ class HttpRequest
     {
         // set defaults
         $this->controllerClassName = self::CONTROLLER_CLASSNAME;
+        $this->actionName = self::ACTION_NAME;
     }
 
     public function setBaseUrl($url)
@@ -57,6 +84,16 @@ class HttpRequest
         return $this->controllerClassName;
     }
 
+    public function getActionName()
+    {
+        return $this->actionName;
+    }
+
+    public function getActionValue()
+    {
+        return $this->actionValue;
+    }
+
     /**
      * get value of $_GET or $_POST. $_POST override the same parameter in $_GET
      * 
@@ -78,7 +115,6 @@ class HttpRequest
         if (!isset($_SERVER['REQUEST_URI'])) {
             return '';
         }
-        Kint::dump($_SERVER['REQUEST_URI']);
 
         $uri = $_SERVER['REQUEST_URI'];
         $uri = trim(str_replace($this->baseUrl, '', $uri), '/');
@@ -93,16 +129,31 @@ class HttpRequest
         // Uri parts
         $uriParts = explode('/', $uri);
 
+
         // if we are in index page
-        if (!isset($uriParts[$this->controllerkey])) {
+        if (empty($uriParts) || $uriParts[$this->controllerkey] == '') {
             return $this;
         }
 
         // format the controller class name
         $this->controllerClassName = $this->formatControllerName($uriParts[$this->controllerkey]);
 
-        // remove controller name from uri
+        if (!isset($uriParts[$this->actionkey])) {
+            return $this;
+        }
+        $this->actionName = $this->formatControllerName($uriParts[$this->actionkey]);
+        
+        if (!isset($uriParts[$this->actionvaluekey])) {
+            return $this;
+        }
+
+        $this->actionValue = $this->formatControllerName($uriParts[$this->actionvaluekey]);
+        
+
+        // remove controller/action/actionvalue name from uri
         unset($uriParts[$this->controllerkey]);
+        unset($uriParts[$this->actionkey]);
+        unset($uriParts[$this->actionvaluekey]);
 
         // if there are no parameters left
         if (empty($uriParts)) {
@@ -133,6 +184,11 @@ class HttpRequest
         return $this;
     }
 
+    public function setActionName($value)
+    {
+        $this->actionName = $value;
+    }
+
     /**
      * word seperator is '-'
      * convert the string from dash seperator to camel case
@@ -141,6 +197,29 @@ class HttpRequest
      * @return type 
      */
     protected function formatControllerName($unformatted)
+    {
+        return $unformatted;
+    }
+
+    /**
+     * word seperator is '-'
+     * convert the string from dash seperator to camel case
+     * 
+     * @param type $unformatted
+     * @return type 
+     */
+    protected function formatActionName($unformatted)
+    {
+        return $unformatted;
+    }
+    /**
+     * word seperator is '-'
+     * convert the string from dash seperator to camel case
+     * 
+     * @param type $unformatted
+     * @return type 
+     */
+    protected function formatActionValueName($unformatted)
     {
     	return $unformatted;
     }

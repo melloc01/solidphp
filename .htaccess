@@ -4,26 +4,16 @@
 
 <IfModule mod_rewrite.c>
 	RewriteEngine On 
-		
-	RewriteCond %{REQUEST_FILENAME} !-f 
-	RewriteCond %{REQUEST_FILENAME} !-d
-	
-	#default patterns to l, sl, cod, p, busca
 
-	#?l=local -> /local
-	RewriteRule ^([a-z0-9_]+)$ ?l=$1 [NC,L]
-	RewriteRule ^([a-z0-9_]+)/$ ?l=$1 [NC,L]
-	
-	#?l=local&sl=sublocal -> local/sublocal
-	RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)$ ?l=$1&sl=$2 [NC,L]
-	RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)/$ ?l=$1&sl=$2 [NC,L]
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.php
+    RewriteRule ^index.php/?(.*)$ $1 [R=301,L]
 
-	#?l=local&sl=sublocal -> local/sublocal/cod
-	RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)/([0-9_]+)$ ?l=$1&sl=$2&cod=$3 [NC,L]
-	RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)/([0-9_]+)/$ ?l=$1&sl=$2&cod=$3 [NC,L]
-
-	#?l=local&sl=sublocal -> local/sublocal/var
-	RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)/([a-z0-9_]+)$ ?l=$1&sl=$2&var=$3 [NC,L]
-	RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)/([a-z0-9_]+)/$ ?l=$1&sl=$2&var=$3 [NC,L]
+    # Run everything else but real files through index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    
+    #dirs
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    
+    RewriteRule ^(.*)$ index.php/$1?%{QUERY_STRING} [L]
 	
 </IfModule>

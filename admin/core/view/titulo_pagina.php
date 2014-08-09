@@ -8,7 +8,7 @@
 			if ( is_array($this->no_controls_lista) ) {
 				if (!in_array("novo", $this->no_controls_lista) ): ?>
 				<li>
-					<a  class="btn btn-primary "  href='./?l=<?php echo $_GET["l"]?>&sl=novo'>Novo <i class="fa fa-file-o fa-fw"></i></a>
+					<a  class="btn btn-primary "  href='<?php echo  $this->httpRequest->getControllerClassName()?>/create'>Novo <i class="fa fa-file-o fa-fw"></i></a>
 				</li>
 			<?php  
 				endif;

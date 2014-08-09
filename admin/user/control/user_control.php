@@ -3,11 +3,11 @@
 class user_control extends LoopControl
 {
 	public 	$registros,
-	$Form, 
-	$Model, 
-	$no_controls_lista,
-	$list_headers,
-	$list_cells;
+			$Form, 
+			$Model, 
+			$no_controls_lista,
+			$list_headers,
+			$list_cells;
 
 	public function __construct($tool="_use")
 	{
@@ -18,9 +18,15 @@ class user_control extends LoopControl
 
 	public function submit()
 	{
-		if (isset($_POST['user:password'])) {
+		if (isset($_POST['user:password'])) 
 			$_POST['user:password'] = crypt($_POST['user:password']);
-		}
+		
+		if (isset($_POST['del'])) 
+			if ($_POST['del'] == 1) {
+				$_SESSION['system_danger'] = "Esse usuário não pode ser removido por esta ferramenta";
+				$this->movePermanently('./user');
+			}
+		
 		parent::submit();
 	}
 
@@ -44,9 +50,11 @@ class user_control extends LoopControl
 	}
 
 
-	public function editar()
+	public function edit()
 	{
-		$registro = $this->Model->getRegistro($_GET["id"],"id");
+		$id = $this->httpRequest->getActionValue();
+		$registro = $this->Model->getRegistro($id);
+
 		$this->setPageTitle("Editar user");
 		$this->Form->setInputs($registro);
 		$this->Form->hideInput("last_access");
@@ -56,7 +64,7 @@ class user_control extends LoopControl
 		$this->render(ADMIN."core/view/editar.php",get_defined_vars());
 	}
 
-	public function novo()
+	public function create()
 	{
 		$this->setPageTitle("Novo Usuário");
 		

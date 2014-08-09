@@ -144,3 +144,19 @@ header{
 .ctPureMessages .panel .panel-body{
     height: 250px;
 }
+
+.animated{
+    -webkit-transition: all .25s linear;
+       -moz-transition: all .25s linear;
+        -ms-transition: all .25s linear;
+         -o-transition: all .25s linear;
+            transition: all .25s linear;
+}
+
+.default-table td {
+    vertical-align: center;
+}
+
+.default-table th {
+    background: #f9f9f9;
+}
