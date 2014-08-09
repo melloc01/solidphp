@@ -21,7 +21,7 @@
       <h3>
         Project
       </h3>
-        <small id="logout">      Olá <?php echo $_SESSION['admin']['user']['login']?>, seu último acesso foi <?php echo $this->Util->getCurrentDate('d/m/Y \a\s h:i');?> (<a href="./?l=login&sl=logout">sair</a>)
+        <small id="logout">      Olá <?php echo $_SESSION['admin']['user']['login']?>, seu último acesso foi <?php echo $this->Util->getCurrentDate('d/m/Y \a\s h:i');?> (<a href="./login/logout">sair</a>)
         </small>
         <div id="menuToggle">
           <div></div>

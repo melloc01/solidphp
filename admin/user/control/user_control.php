@@ -26,6 +26,7 @@ class user_control extends LoopControl
 				$_SESSION['system_danger'] = "Esse usuário não pode ser removido por esta ferramenta";
 				$this->movePermanently('./user');
 			}
+			$this->actionForms = './';
 		
 		parent::submit();
 	}

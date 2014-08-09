@@ -208,7 +208,6 @@ class LoopControl
 				$this->Form = new Form($this->getClassName());
 			$this->system_requires();
 			$this->redirectURL = $this->getFullurl();		
-			$this->actionForms = $this->getActionForms();	
 			$this->setNotifications();
 		}
 
@@ -243,20 +242,10 @@ class LoopControl
 			$this->published_notification  = "Registro publicado com sucesso.";	
 		}
 
-		public function getActionForms()
+		public function setActionForms()
 		{	
-			if (isset($_GET) && ($_GET != null)) {
-				$url = "./?";
-				foreach ($_GET as $key => $value) {
-					if ($key != 'sl' && $key != 'id') {
-						$url .= "$key=$value";
-					}
-				}
-				return $url;
-			} 
-			return "";
+			return $this->httpRequest->getControllerClassName();
 
-			// return (isset($_GET['l']))? "./?l={$_GET['l']}" : "./";
 		}
 
 		public function requireModel($classe, $parent ="")
@@ -312,6 +301,7 @@ class LoopControl
 
 		public function route()
 		{
+			$this->actionForms = $this->setActionForms();	
 			$action = $this->httpRequest->getActionName();
 			if (method_exists($this, $action)){
 				$this->httpRequest = $this->httpRequest->createRequest(); //flush request || default_control behavior

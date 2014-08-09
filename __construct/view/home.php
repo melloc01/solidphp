@@ -123,7 +123,7 @@ function cria_ferramenta (element) {
 function cria_estrutura_admin_especial (nome) {
 	var table = nome;
 		$.ajax({
-			url: './__construct/buildAdminStructure',
+			url: './__construct/buildStaticAdminStructure',
 			type: 'post',
 			dataType: 'html',
 			data: { table:table, createTool : false },

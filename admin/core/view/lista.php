@@ -53,7 +53,7 @@
 							<?php if (!in_array("publicar", $this->no_controls_lista) && isset($registro['publicado']) ){?>
 
 							<form id="pub_<?php echo $registro['id']?>" method="post" accept-charset="utf-8">
-								<td class="text-center opcaoLista" title="<?php echo ($registro['publicado']==0)?"publicar ":"despublicar "; echo $_GET['l'] ?>" onclick='togglePublicado()'>
+								<td class="text-center opcaoLista" title="<?php echo ($registro['publicado']==0)?"publicar ":"despublicar "; echo $this->httpRequest->getControllerClassName() ?>" onclick='togglePublicado()'>
 									<div >
 										<input type="hidden" name="id" value="<?php echo $registro['id']?>">
 										<input type="hidden" name="pub" value="<?php echo $registro['publicado']?>">
@@ -71,7 +71,7 @@
 							<?}?>
 							<?php if (!in_array("remover", $this->no_controls_lista) ){?>
 							<form id="rem_<?php echo $registro['id']?>" method="post" accept-charset="utf-8">
-								<td class="text-center opcaoLista" title="deletar <?php echo $_GET['l']?>">
+								<td class="text-center opcaoLista" title="deletar <?php echo $this->httpRequest->getControllerClassName()?>">
 									<div >
 										<input type="hidden" name="del" value="<?php echo $registro['id']?>">
 										<button type="button" onclick="confirmDelete(<?php echo $registro['id']?>);" class="btn  btn-danger  "><small class="esconde_mobile"><!-- Remover --> </small><i class="fa fa-times fa-fw"></i></button>

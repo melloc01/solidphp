@@ -22,7 +22,6 @@ class Application
 		$this->httpRequest = $request->createRequest();
 		$this->route();
 
-		Kint::dump($this->httpRequest);
 	}
 
 	public function route()

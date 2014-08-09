@@ -142,6 +142,8 @@ class __construct_control extends LoopControl
 				mkdir(ADMIN."$table/control");
 				mkdir(ADMIN."$table/model");
 				mkdir(ADMIN."$table/view");
+				mkdir(ADMIN."$table/css");
+				mkdir(ADMIN."$table/js");
 				mkdir(ADMIN."$table/uploads");
 			}
 			else
@@ -228,7 +230,44 @@ class '.$table.'_model extends LoopModel
 			mkdir(ADMIN."$table/control");
 		}
 		file_put_contents(ADMIN."$table/control/".$table."_control.php", $data_control);
+		file_put_contents(ADMIN."$table/css/".$table.".css",'');
+		file_put_contents(ADMIN."$table/js/".$table.".js",'');
 	}
+
+	$this->movePermanently('./');
+	}
+
+	public function buildStaticAdminStructure()
+	{
+		$table = $_POST['table'];
+		$data_control = '<?php
+class '.$table.'_control extends LoopControl
+{
+	public function __construct($tool="'.$ferramenta.'")
+	{
+		parent::__construct($tool);
+	}
+
+	public function home()
+	{	
+		$this->render(ADMIN."'.$table.'/view/home.php");	
+	}
+
+
+}';
+
+
+$data_view =' home de '.$table.'';
+
+		mkdir(ADMIN."$table");
+		mkdir(ADMIN."$table/control");
+		mkdir(ADMIN."$table/view");
+		mkdir(ADMIN."$table/css");
+		mkdir(ADMIN."$table/js");
+		file_put_contents(ADMIN."$table/control/".$table."_control.php", $data_control);
+		file_put_contents(ADMIN."$table/css/".$table.".css", '');
+		file_put_contents(ADMIN."$table/js/".$table.".js", '');
+		file_put_contents(ADMIN."$table/view/home.php", $data_view);
 
 	$this->movePermanently('./');
 	}

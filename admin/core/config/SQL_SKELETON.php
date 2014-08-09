@@ -52,7 +52,7 @@ CREATE TABLE '.$schema_name.'.user(
   id int( 11 ) not null auto_increment primary key ,
   type varchar(32) DEFAULT "admin" ,
   login varchar(128) UNIQUE not null,
-  password varchar( 64 ) ,
+  password varchar( 128 ) ,
   last_access timestamp ,
   fkaccess_level int(11) not null ,
 
