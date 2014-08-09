@@ -13,12 +13,12 @@
 
   <div class="menuLeftMobile animated">
     <div class="row">
-      <div class="col-sm-12 text-center">
-        <i style='font-size:25px; color:white; cursor:pointer;' class='fa fa-arrow-circle-o-left pull-right' onclick="$('.menuLeftMobile').css('left','-300px');"></i>
+      <div class="col-sm-12 text-center" >
+        <i style='font-size:25px; color:white; cursor:pointer; margin:15px 15px 0 0' class='fa fa-arrow-circle-o-left pull-right' onclick="$('.menuLeftMobile').css('left','-300px');"></i>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-12 text-center">
+      <div class="col-sm-12 text-center" >
         <a href=""><h4 style="color:white;">Projeto</h4></a>
       </div>
     </div>
