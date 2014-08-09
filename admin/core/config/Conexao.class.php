@@ -9,7 +9,6 @@ class Conexao{
     
     public static function getInstance() {
         
-
         if (!isset(self::$instance)) {
                 self::$instance = new PDO( DB_DRIVER.":host=".DB_HOST.";dbname=".DB_SCHEMA_NAME.";", DB_USER, DB_USER_PASSWORD); 
                 self::$instance->exec("SET CHARACTER SET utf8");

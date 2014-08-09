@@ -50,9 +50,15 @@
 
 ?>
 </div>
-
+<?php  
+	if (isset($_SESSION['message_time'])) {
+		$message_time =   $_SESSION['message_time'];
+		unset($_SESSION['message_time']);
+	} else 
+		$message_time =    1000;
+?>
 <script type="text/javascript">
 	setTimeout(function() {
-		$("#ctSysMsg").slideUp();
-	},1000);
+		$("#ctSysMsg").slideUp(750);
+	},<?php echo $message_time ?>);
 </script>

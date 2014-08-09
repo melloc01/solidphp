@@ -147,6 +147,13 @@ header{
 
 
 .ctSysMsg .alert{ border-radius: 0;}
+.ctSysMsg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
 .ctPureMessages{
     margin-top: 10%;
 }
@@ -177,7 +184,7 @@ header{
     left: -300px;
     height: 100%;
     background-color: #111;
-    z-index: 10000;
+    z-index: 888;
     box-shadow: 0 0 10px black;
     text-align: center;
 }

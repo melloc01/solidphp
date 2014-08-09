@@ -17,7 +17,9 @@ class LoopModel
 	
 	public function connect()
 	{
-		$this->db = Conexao::getInstance();
+		if (!is_object($this->db)) {
+			$this->db = Conexao::getInstance();
+		}
 	}
 
 	public function getLastInsertId()
@@ -104,7 +106,7 @@ class LoopModel
 		$this->connect();
 		$dbStatment = $this->db->prepare($sql);
 		if ($dbStatment->execute($param_array)){  //PDO method
-			return true;
+			return $this->db->lastInsertId();
 		} else {
 			$error = $dbStatment->errorInfo();
 			$_SESSION['mysql_error'] = $error;
@@ -118,7 +120,8 @@ class LoopModel
 	*/
 	public function startTransaction()
 	{
-		return $this->runQuery('START TRANSACTION;');
+		$this->connect();
+		$this->db->beginTransaction();
 	}
 
 	/**
@@ -126,14 +129,16 @@ class LoopModel
 	*/
 	public function commit()
 	{
-		return $this->runQuery('COMMIT;');
+		$this->connect();
+		$this->db->commit();
 	}
 	/**
 	 *  COMMIT();
 	*/
 	public function rollback()
 	{
-		return $this->runQuery('ROLLBACK;');
+		$this->connect();
+		$this->db->rollBack();
 	}
 
 	public function getRegistros($search="",$order="", $attributes="*")
@@ -375,7 +380,6 @@ public function insert($array_insert)
 	$values_statement .= " ) ";
 
 	$sql = $sql_statement.$values_statement;
-
 	return $this->runPDOQuery($sql,$param_array);
 }
 

@@ -156,7 +156,8 @@ class LoopControl
 				if (isset($_SESSION['admin'])) {
 					if (!$this->hasAccess($tool) && $tool != '') {
 						$this->setAccessError();
-						$this->movePermanently('./');
+						$_SESSION['message_time'] = 1500;
+						$this->movePermanently('../');
 					}
 				} 
 			}
@@ -433,6 +434,11 @@ class LoopControl
 		public function printMessage()
 		{
 			require ADMIN.'core/view/system_messages.php';
+		}
+
+		public function getActionValue()
+		{
+			return $this->httpRequest->getActionValue();
 		}
 
 	}

@@ -374,8 +374,10 @@
 			
 			public function hasColumn($column)
 			{
-				foreach ($this->colunas as $key => $coluna) {
-					if ($coluna['Field'] == $column) return true;
+				if ($this->colunas) {
+					foreach ($this->colunas as $key => $coluna) {
+						if ($coluna['Field'] == $column) return true;
+					}
 				}
 				return false;
 			}
