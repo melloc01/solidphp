@@ -65,6 +65,8 @@ header{
 .sidebar{
     background: url("../img/bg_linen.png");
     display: table;
+    margin-left: -15px;
+    margin-right: -15px;
     height: 100%;
     color: #eee;
 }
@@ -159,4 +161,23 @@ header{
 
 .default-table th {
     background: #f9f9f9;
+}
+
+
+.menuLeftMobile{
+    position: fixed;
+    width: 250px;
+    top: 0;
+    left: -300px;
+    height: 100%;
+    background-color: #111;
+    z-index: 10000;
+    box-shadow: 0 0 10px black;
+    text-align: center;
+}
+.menuLeftMobile a{
+    padding: 20px ;
+    display: block;
+    font-size: 16px;
+    color: white;
 }
