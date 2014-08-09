@@ -1,5 +1,5 @@
 <?php  
-  $sql_base = 'create table '.$schema_name.'.access_level (
+    $sql_base = 'create table '.$schema_name.'.access_level (
     id int(11) not null auto_increment primary key,
     name varchar(64) not null unique
 );

@@ -16,14 +16,19 @@ class __construct_control extends LoopControl
 	{
 		if ($this->testDatabase()) {
 			$dummy_model = new access_model();
-			$_tables = $dummy_model->runSQL("SHOW TABLES");
+			try {
+				$_tables = $dummy_model->runSQL("SHOW TABLES");	
+				$this->db_tables = array();
+				foreach ($_tables as $key => $table) 
+					if (!in_array($table[0], $this->system_tables)) 
+						array_push($this->db_tables, $table[0]);
 
-			$this->db_tables = array();
-			foreach ($_tables as $key => $table) 
-				if (!in_array($table[0], $this->system_tables)) 
-					array_push($this->db_tables, $table[0]);
+				$this->render(ROOT."__construct/view/home.php",get_defined_vars());
+				
+			} catch (Exception $e) {
+				$this->noDatabase();
+			}
 
-			$this->render(ROOT."__construct/view/home.php",get_defined_vars());
 		}
 	}
 
@@ -54,28 +59,27 @@ class __construct_control extends LoopControl
 
 	public function noDatabase()
 	{
+
 		$this->render(ROOT.'__construct/view/no_database.php',get_defined_vars());
 	}
 
 	public function createSchema()
 	{
 		$schema_name = $_POST['db_name'];
+		$db = Conexao::getInstanceNoDB();
 		$sql = "CREATE SCHEMA `$schema_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci" ;
-		$dummy_model = new access_model();
-
-		$_success = true;
-		$_success &= $dummy_model->runQuery($sql);
-		$_success &= $dummy_model->startTransaction();
-		if ($_success){
-			require ADMIN.'core/config/SQL_SKELETON.php';
-			$_success &= $dummy_model->runQuery($sql_base);
-		}
-
-
-
-		if($_success)
+		
+		$dbStatment = $db->prepare($sql);
+		if ($dbStatment->execute()){
 			$_SESSION['system_success'] = "Database created successfully.";
-
+			require ADMIN.'core/config/SQL_SKELETON.php';
+			$dbStatment = $db->prepare($sql_base);
+			$dbStatment->execute();
+		} else {
+			$error = $dbStatment->errorInfo();
+			$_SESSION['mysql_error'] = $error;
+			return false;
+		}
 
 		$this->movePermanently('./');
 	}

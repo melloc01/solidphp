@@ -7,13 +7,13 @@
 		
 
 	if (strpos(getcwd(), 'admin')) {
-		define ('BASE_URL','http://localhost/LitePHP/admin/');
+		define ('BASE_URL','http://localhost/solidphp/admin/');
 		define("ADMIN", "./");
 		define("ROOT", "../");
 		define("CURRENT_BASE",ADMIN);
 		define("ON_ADMIN",TRUE);
 	} else {
-		define ('BASE_URL','http://localhost/LitePHP/');
+		define ('BASE_URL','http://localhost/solidphp/');
 		define("ADMIN", "./admin/");
 		define("ROOT", "./");
 		define("CURRENT_BASE",ROOT);
