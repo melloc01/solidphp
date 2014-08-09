@@ -19,7 +19,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12 text-center">
-        <h4 style="color:white;">Menu</h4>
+        <a href=""><h4 style="color:white;">Projeto</h4></a>
       </div>
     </div>
     <?
@@ -39,14 +39,14 @@
   ?>
   <?php   
     if ($_SESSION['admin']['access']['_use']) {?>
-      <a href="./?l=user" title="Configurações">
+      <a href="./user" title="Configurações">
         <i class="fa fa-users fa-fw"></i> Usuários
       </a>
     <?php  }
     ?>
     <?php   
     if ($_SESSION['admin']['access']['_his']) {?>
-      <a href="./?l=history" title="Configurações">
+      <a href="./history" title="Configurações">
         <i class="fa fa-bar-chart-o fa-fw"></i> Histórico
       </a>
     <?php  }

@@ -109,7 +109,7 @@ header{
         z-index: 100;
     }
     #content{
-        padding-top: 50px;
+        padding-top: 120px;
     }
 }
 @media (min-width: 768px) {
