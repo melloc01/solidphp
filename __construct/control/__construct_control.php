@@ -86,7 +86,7 @@ class __construct_control extends LoopControl
 
 	public function addToMenuLeft()
 	{
-		$table = $_GET['var'];
+		$table = $this->httpRequest->getActionValue();
 		$access_model = new access_model();
 		$access_tool_model = new access_tool_model();
 		$menul_model = new menul_model();
@@ -97,7 +97,7 @@ class __construct_control extends LoopControl
 
 		$insert_menul = array(
 				'mask' => $table,
-				'link' => "./?l=$table",
+				'link' => "./$table",
 				'fkaccess_tool' => $ferramentaID
 		);
 
@@ -196,7 +196,8 @@ class '.$table.'_control extends LoopControl
 
 	public function edit()
 	{
-		$registro = $this->Model->getRegistro($_GET["id"],"id");
+		$id = $this->httpRequest->getActionValue();
+		$registro = $this->Model->getRegistro($id);
 		$this->setPageTitle("Editar '.$table.'");
 		$this->Form->setInputs($registro);
 

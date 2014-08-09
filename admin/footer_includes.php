@@ -17,7 +17,7 @@
  $('.datepicker').datetimepicker({
    lang:'pt',
    timepicker:false,
-   format:'Y-m-d',
+   format:'d/m/Y',
    closeOnDateSelect: true
  });
 

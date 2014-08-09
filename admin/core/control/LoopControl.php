@@ -75,9 +75,6 @@ class LoopControl
 		* @param string : site_title  - title of the site ( inside <head> </head> on templatehead) 
 		*/			
 
-		$project_name = 'LitePHP',
-
-
 
 		/**
 		* 	@param url formatted string : $action_forms
@@ -239,14 +236,9 @@ class LoopControl
 			$this->danger_notification  = "Houve um erro ao executar a ação.";	
 
 			$this->deleted_notification  = "Registro deletado com sucesso.";	
-			$this->published_notification  = "Registro publicado com sucesso.";	
+			$this->published_notification  = "Visualização alterada com sucesso.";	
 		}
 
-		public function setActionForms()
-		{	
-			return $this->httpRequest->getControllerClassName();
-
-		}
 
 		public function requireModel($classe, $parent ="")
 		{
@@ -301,7 +293,6 @@ class LoopControl
 
 		public function route()
 		{
-			$this->actionForms = $this->setActionForms();	
 			$action = $this->httpRequest->getActionName();
 			if (method_exists($this, $action)){
 				$this->httpRequest = $this->httpRequest->createRequest(); //flush request || default_control behavior
@@ -378,7 +369,7 @@ class LoopControl
 					$_SESSION['system_success'] = $this->success_notification;
 				else
 					$this->dispatchErrors();
-				$this->movePermanently($this->actionForms);
+				$this->movePermanently('./');
 			}
 			
 			if (isset($_POST["upd"])){
@@ -386,7 +377,7 @@ class LoopControl
 					$_SESSION['system_info'] = $this->info_notification;
 				else
 					$this->dispatchErrors();
-				$this->movePermanently($this->actionForms);
+				$this->movePermanently('../');
 			}
 			
 			if (isset($_POST["del"])){
@@ -394,7 +385,7 @@ class LoopControl
 					$_SESSION['system_info'] = $this->deleted_notification;
 				else 
 					$this->dispatchErrors();
-				$this->movePermanently($this->actionForms);
+				$this->movePermanently('./');			
 			}
 
 			if (isset($_POST["pub"])){
@@ -402,7 +393,7 @@ class LoopControl
 					$_SESSION['system_info'] = $this->published_notification;
 				else 
 					$this->dispatchErrors();
-				$this->movePermanently($this->actionForms);
+				$this->movePermanently();
 			}
 		}
 

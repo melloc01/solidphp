@@ -137,8 +137,8 @@
 		public function getColumnsFromTable($table)
 		{
 			$sql = "SELECT DISTINCT(COLUMN_NAME) as Field, DATA_TYPE as Type, IS_NULLABLE, COLUMN_DEFAULT
-			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE table_name =  '$table'";
+					FROM INFORMATION_SCHEMA.COLUMNS
+					WHERE table_name =  '$table' and table_schema = '".DB_SCHEMA_NAME."'";
 			$dbStatment = Conexao::getInstance()->prepare($sql);
 			if($dbStatment->execute() && $dbStatment->rowCount() != 0){
 				return  $dbStatment->fetchAll();

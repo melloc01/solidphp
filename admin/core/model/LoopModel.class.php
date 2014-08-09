@@ -314,9 +314,9 @@ public function submit_publicado($historico=false)
 
 	$sql = " update $this->table set publicado = $publicado  where id = $id";
 
-	$dbStatment = $this->db->prepare($sql);
+	
 
-	if($dbStatment->execute()){
+	if($this->runQuery($sql)){
 		if ($historico) {
 			$this->addHistorico('Remoção',$this->table,$id,$str);
 			$registro = $this->getRegistro($id);
