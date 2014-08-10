@@ -4,6 +4,7 @@ body,html{
 }
 .sidebar{
     margin-top: -1px !important;
+    padding: 15px;
 }
 .ctInputGroup{
     margin: 15px 0;

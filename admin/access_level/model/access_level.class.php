@@ -6,4 +6,5 @@ class access_level_model extends LoopModel
 	{
 		parent::__construct();
 	}
+
 }

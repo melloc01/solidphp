@@ -55,7 +55,7 @@
 		$message_time =   $_SESSION['message_time'];
 		unset($_SESSION['message_time']);
 	} else 
-		$message_time =    1000;
+		$message_time =    2500;
 ?>
 <script type="text/javascript">
 	setTimeout(function() {
@@ -64,6 +64,6 @@
 		})
 		setTimeout(function() {
 			$("#ctSysMsg").remove();
-		},750);
+		},1000);
 	},<?php echo $message_time ?>);
 </script>

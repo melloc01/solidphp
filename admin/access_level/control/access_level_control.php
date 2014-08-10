@@ -18,8 +18,22 @@ class access_level_control extends LoopControl
 	public function submit()
 	{
 		if (isset($_POST['upd'])) {
-			Kint::dump($_POST);
-			$tools = "";
+			$update_level = array(
+				'name' => $_POST['name'],
+				'id' => 1
+			);
+			$access_level_model = new access_level_model();
+			$bool = true;
+			$bool &= $access_level_model->update($_POST['upd'],$update_level);
+			$bool &= $this->insertAccessLevel($_POST,$_POST['upd']);
+
+			if ($bool) {
+				$_SESSION['system_info'] = "Nível de acesso editado com sucesso.";
+			} else {
+				$this->dispatchErrors();
+			}
+
+			$this->movePermanently('../');
 	
 		}
 
@@ -56,9 +70,9 @@ class access_level_control extends LoopControl
 		$id = $this->httpRequest->getActionValue();
 		$access_tool_model = new access_tool_model();
 
+		
 		$registro = $this->Model->getRegistro($id);
-		$tools = $access_tool_model->getRegistros();
-
+		$tools = $access_tool_model->getToolLevel($id);
 
 		$this->setPageTitle("Editar Nível de Acesso - {$registro['name']}");
 
@@ -75,7 +89,7 @@ class access_level_control extends LoopControl
 		$this->render(ADMIN."access_level/view/novo.php",get_defined_vars());
 	}
 
-	public function insertAccessLevel($post_data)
+	public function insertAccessLevel($post_data,$access_levelID = null)
 	{
 		$access_model =  new access_model;
 		$access_level_model = new access_level_model;
@@ -85,18 +99,27 @@ class access_level_control extends LoopControl
 			'name' => $post_data['name']
 		);
 
+
 		$bool = true;
-		$newLevelID =  $access_level_model->insert($insert_level);
+
+		$newLevelID = $access_levelID == null ?  $access_level_model->insert($insert_level) : $access_levelID;
 		$bool &= $newLevelID > 0 ;
 
-
-		foreach ($post_data['tools'] as $key => $value) {
-			$insert_array = array (
-				'fkaccess_tool' => $value,
-				'fkaccess_level' => $newLevelID
-			);
-			$bool &= $access_model->insert($insert_array) > 0;
+		if ($access_levelID != null) {
+			$access_model->deleteRegistro(" fkaccess_level = $newLevelID ");
 		}
+
+
+		if (isset($_POST['tools'])) {
+			foreach ($post_data['tools'] as $key => $value) {
+				$insert_array = array (
+					'fkaccess_tool' => $value,
+					'fkaccess_level' => $newLevelID
+				);
+				$bool &= $access_model->insert($insert_array) > 0;
+			}		
+		}
+
 
 		if ($bool) {
 			$access_level_model->commit();

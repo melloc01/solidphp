@@ -122,7 +122,7 @@ class __construct_control extends LoopControl
 				'name' => $table,
 				'code' => $ferramenta,
 				'table_name' => $table,
-				'description' => "Permissão para Cadastrar/Alterar/Remover cadastros de {$table}s.) "
+				'description' => "Permissão para Cadastrar/Alterar/Remover cadastros de {$table}s. "
 			);
 
 			$access_model->startTransaction();

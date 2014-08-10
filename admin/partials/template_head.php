@@ -59,7 +59,7 @@
      </div>
    </div>
    <div class="row">
-    <div class="col-sm-3 col-md-2 ctSidebar text-center">
+    <div class="col-sm-4 col-md-3 ctSidebar text-center">
     <div class='sidebar'>
         <div >
           <h3>
@@ -83,4 +83,4 @@
 
       </div>
     </div>
-    <div id="content" class="col-sm-9 col-md-10">
+    <div id="content" class="col-sm-8 col-md-9">

@@ -106,7 +106,7 @@ class LoopModel
 		$this->connect();
 		$dbStatment = $this->db->prepare($sql);
 		if ($dbStatment->execute($param_array)){  //PDO method
-			return $this->db->lastInsertId();
+			return true;
 		} else {
 			$error = $dbStatment->errorInfo();
 			$_SESSION['mysql_error'] = $error;
@@ -380,7 +380,32 @@ public function insert($array_insert)
 	$values_statement .= " ) ";
 
 	$sql = $sql_statement.$values_statement;
-	return $this->runPDOQuery($sql,$param_array);
+
+
+	return $this->runPDOQuery($sql,$param_array) ? $this->db->lastInsertId() : false;
+}
+/**
+ *  function insert()
+ *
+ *	@param $array_insert ( 'column' => 'value')
+ *
+ *
+ */
+public function update($id,$array_insert,$key = 'id')
+{
+	$sql_statement = "UPDATE $this->table SET  ";
+	$values_statement = ") VALUES (";
+	$param_array  = array();
+
+	foreach ($array_insert as $key => $value){
+		array_push($param_array, $value);
+		$sql_statement .= " $key = ?,";
+	}
+	//delete last comas
+	$sql_statement = substr($sql_statement, 0, -1);
+	$sql_statement .= " WHERE $key = '$id' ";
+
+	return $this->runPDOQuery($sql_statement,$param_array);
 }
 
 public function submit_update($historico=false,$chave="id",$id = 0)
@@ -479,12 +504,12 @@ public function addHistorico($operacao, $tabela,$idTupla,$sql="")
 		return $aux[0];
 	}
 	
-	public function deleteRegistro($attr,$cond)
+	public function deleteRegistro($cond)
 	{
+		$this->connect();
 		$sql = " DELETE FROM $this->table where $cond";
-		$dbStatment = $this->db->prepare($sql);
 
-		if ($dbStatment->execute()) {
+		if ($this->runQuery($sql)) {
 			return true;
 		}
 		return false;

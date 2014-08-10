@@ -17,7 +17,7 @@
 								
 							</td>
 							<td style="padding-left:15px;">
-								<span>Níveis de Usuário<br><small>Gerencie níveis de acesso de suas ferramentas.</small></span>
+								<span>Níveis de Acesso<br><small>Gerencie níveis de acesso  das <br> ferramentas do sistema.</small></span>
 							</td>
 						</tr>
 					</table>
