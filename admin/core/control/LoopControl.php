@@ -310,14 +310,16 @@ class LoopControl
 			}	
 		}
 
-		public function render($file_location, $defined_vars = null)
+		public function render($file_location, $defined_vars = null, $renderLayout = true)
 		{
 			$_defined_vars = $defined_vars;
-			if (is_array($defined_vars)) 
-				foreach ( $defined_vars as $name => $value)
-					$$name = $value;
+			if ($renderLayout) {
+				if (is_array($defined_vars)) 
+					foreach ( $defined_vars as $name => $value)
+						$$name = $value;
 
-			$this->include_head();
+				$this->include_head();
+			}
 
 			if (is_array($_defined_vars)) 
 				foreach ( $_defined_vars as $name => $value)
@@ -325,11 +327,13 @@ class LoopControl
 
 			require $file_location;
 
-			if (is_array($_defined_vars)) 
-				foreach ( $_defined_vars as $name => $value)
-					$$name = $value;
+			if ($renderLayout) {
+				if (is_array($_defined_vars)) 
+					foreach ( $_defined_vars as $name => $value)
+						$$name = $value;
 
-			$this->include_footer();
+				$this->include_footer();
+			}
 		}
 
 		
