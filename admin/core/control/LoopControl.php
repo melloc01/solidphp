@@ -310,10 +310,10 @@ class LoopControl
 			}	
 		}
 
-		public function render($file_location, $defined_vars = null, $renderLayout = true)
+		public function render($file_location, $defined_vars = null, $renderPartials = true)
 		{
 			$_defined_vars = $defined_vars;
-			if ($renderLayout) {
+			if ($renderPartials) {
 				if (is_array($defined_vars)) 
 					foreach ( $defined_vars as $name => $value)
 						$$name = $value;
@@ -327,7 +327,7 @@ class LoopControl
 
 			require $file_location;
 
-			if ($renderLayout) {
+			if ($renderPartials) {
 				if (is_array($_defined_vars)) 
 					foreach ( $_defined_vars as $name => $value)
 						$$name = $value;
