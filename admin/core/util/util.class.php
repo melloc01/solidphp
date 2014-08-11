@@ -249,6 +249,12 @@
 				return $e;
 			}
 		}
+
+		public function hashNameGenerator()
+		{
+			$_name = "_hash".rand()."_hash".rand()."_hash";
+			return md5($_name);
+		}
 		
 
 		/**

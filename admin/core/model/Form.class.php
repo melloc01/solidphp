@@ -111,7 +111,7 @@
 							$inputs[$coluna['Field']]['label'] .= ($mask!="") ? $mask : $coluna['Field'];
 
 							$inputs[$coluna['Field']]['label'] .= "</label>";
-							$inputs[$coluna['Field']]['input']  ="<select class='form-control default_input' name='$this->tableName:{$coluna['Field']}' id='$this->tableName:{$coluna['Field']}'> 
+							$inputs[$coluna['Field']]['input']  ="<select class='form-control default_input' name='{$coluna['Field']}' id='$this->tableName:{$coluna['Field']}'> 
 							";
 
 							$show_fk = $this->custom_inputs[$coluna['Field']]['fkmask'];
@@ -140,7 +140,7 @@
 								$inputs[$coluna['Field']]['label']  = "<label for='$this->tableName:{$coluna['Field']}' class='capital'>";
 								$inputs[$coluna['Field']]['label'] .= ($mask!="")? $mask : $coluna['Field'];
 								$inputs[$coluna['Field']]['label'] .= "</label> ";
-								$inputs[$coluna['Field']]['input']  ="<textarea class='ckeditor form-control default_input' placeholder='{$coluna['Field']}' id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}'>{$registro[$coluna['Field']]}</textarea>"; 
+								$inputs[$coluna['Field']]['input']  ="<textarea class='ckeditor form-control default_input' placeholder='{$coluna['Field']}' id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}'>{$registro[$coluna['Field']]}</textarea>"; 
 								break;
 
 								case 'tinyint':
@@ -148,12 +148,12 @@
 								$inputs[$coluna['Field']]['label']  .= ($mask!="")? $mask : $coluna['Field'];
 								$inputs[$coluna['Field']]['label']  .="</label><br>";
 								$inputs[$coluna['Field']]['input']   = "<label  class='capital'>";
-								$inputs[$coluna['Field']]['input'] .="<input type='radio'  id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}' value='1' ";
+								$inputs[$coluna['Field']]['input'] .="<input type='radio'  id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}' value='1' ";
 								$inputs[$coluna['Field']]['input'] .= (($registro[$coluna['Field']] == "1") || ($registro[$coluna['Field']]=="") ) ?"checked":"";
 								$inputs[$coluna['Field']]['input'] .= "/>";
 								$inputs[$coluna['Field']]['input'] .= ' Sim </label>';
 								$inputs[$coluna['Field']]['input'] .=" <label  class='capital'>";
-								$inputs[$coluna['Field']]['input'] .="<input type='radio'  id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}' value='0'";
+								$inputs[$coluna['Field']]['input'] .="<input type='radio'  id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}' value='0'";
 								$inputs[$coluna['Field']]['input'] .= (($registro[$coluna['Field']] == "0") || ($registro[$coluna['Field']]=="") ) ?"checked":"";
 								$inputs[$coluna['Field']]['input'] .= "/>";
 								$inputs[$coluna['Field']]['input'] .= ' Não </label>';
@@ -163,7 +163,7 @@
 									$inputs[$coluna['Field']]['label'] ="<label for='$this->tableName:{$coluna['Field']}' class='capital'>";
 									$inputs[$coluna['Field']]['label'] .= ($mask!="")? $mask : $coluna['Field'];
 									$inputs[$coluna['Field']]['label'] .="</label>";
-									$inputs[$coluna['Field']]['input'] = "<input type='text' class='datepicker form-control default_input' placeholder='{$coluna['Field']}' id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}' value='";
+									$inputs[$coluna['Field']]['input'] = "<input type='text' class='datepicker form-control default_input' placeholder='{$coluna['Field']}' id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}' value='";
 									$inputs[$coluna['Field']]['input'] .= ($registro[$coluna['Field']] != "0000-00-00" ) ?$registro[$coluna['Field']] : date('Y-m-d'); 
 									$inputs[$coluna['Field']]['input'] .="'/><small class='info text-muted'></small>";
 								break;
@@ -172,7 +172,7 @@
 								$inputs[$coluna['Field']]['label']  ="<label for='$this->tableName:{$coluna['Field']}' class='capital'>";
 								$inputs[$coluna['Field']]['label'] .= ($mask!="")? $mask : $coluna['Field'];
 								$inputs[$coluna['Field']]['label'] .="</label>";
-								$inputs[$coluna['Field']]['input']  ="<input type='text' class='datetimepicker form-control default_input' placeholder='{$coluna['Field']}' id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}' value='";
+								$inputs[$coluna['Field']]['input']  ="<input type='text' class='datetimepicker form-control default_input' placeholder='{$coluna['Field']}' id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}' value='";
 								$inputs[$coluna['Field']]['input'] .= ($registro[$coluna['Field']] != "0000-00-00 00:00:00" ) ?$registro[$coluna['Field']] : date('Y-m-d'); 
 								$inputs[$coluna['Field']]['input'] .="'/><small class='info text-muted'></small>";
 								break;
@@ -181,7 +181,7 @@
 								$inputs[$coluna['Field']]['label'] ="<label for='$this->tableName:{$coluna['Field']}' class='capital'>";
 								$inputs[$coluna['Field']]['label'] .= ($mask!="")? $mask : $coluna['Field'];
 								$inputs[$coluna['Field']]['label'] .="</label>";
-								$inputs[$coluna['Field']]['input'] = "<input type='text' class='timepicker form-control default_input' placeholder='{$coluna['Field']}' id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}' value='";
+								$inputs[$coluna['Field']]['input'] = "<input type='text' class='timepicker form-control default_input' placeholder='{$coluna['Field']}' id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}' value='";
 								$inputs[$coluna['Field']]['input'] .= ( $registro[$coluna['Field']]!=""  ) ? $registro[$coluna['Field']] : date('H:i'); 
 								$inputs[$coluna['Field']]['input'] .="'/><small class='info text-muted'></small>";
 								break;
@@ -190,14 +190,14 @@
 								$inputs[$coluna['Field']]['label']  = "<label for='$this->tableName:{$coluna['Field']}' class='capital'>";
 								$inputs[$coluna['Field']]['label'] .= ($mask!="")? $mask : $coluna['Field'];
 								$inputs[$coluna['Field']]['label'] .="</label>";
-								$inputs[$coluna['Field']]['input']  ="<input class='form-control default_input' type='number' value='{$registro[$coluna['Field']]}' id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}'  placeholder='{$coluna['Field']}'>";
+								$inputs[$coluna['Field']]['input']  ="<input class='form-control default_input' type='number' value='{$registro[$coluna['Field']]}' id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}'  placeholder='{$coluna['Field']}'>";
 								break;
 
 								case 'decimal':
 								$inputs[$coluna['Field']]['label']  = "<label for='$this->tableName:{$coluna['Field']}' class='capital'>";
 								$inputs[$coluna['Field']]['label'] .= ($mask!="")? $mask : $coluna['Field'];
 								$inputs[$coluna['Field']]['label'] .="</label>";
-								$inputs[$coluna['Field']]['input']  = "<input class='form-control default_input' type='number' step='$this->step' min='0' value='{$registro[$coluna['Field']]}' id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}'  placeholder='{$coluna['Field']}'>";
+								$inputs[$coluna['Field']]['input']  = "<input class='form-control default_input' type='number' step='$this->step' min='0' value='{$registro[$coluna['Field']]}' id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}'  placeholder='{$coluna['Field']}'>";
 								break;
 
 								case 'varchar':
@@ -206,45 +206,45 @@
 									$inputs[$coluna['Field']]['label']  = "<label for='$this->tableName:{$coluna['Field']}' class='capital'>";
 									$inputs[$coluna['Field']]['label'] .= ($mask!="")? $mask : $coluna['Field'];
 									$inputs[$coluna['Field']]['label'] .= "</label>";
-									$inputs[$coluna['Field']]['input']  = "<input class='form-control default_input' type='email' value='{$registro[$coluna['Field']]} ' id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}' placeholder='{$coluna['Field']}'>";
+									$inputs[$coluna['Field']]['input']  = "<input class='form-control default_input' type='email' value='{$registro[$coluna['Field']]} ' id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}' placeholder='{$coluna['Field']}'>";
 									break;
 									case 'password':
 									case 'senha':
 									$inputs[$coluna['Field']]['label']  = "<label for='$this->tableName:{$coluna['Field']}' class='capital'>";
 									$inputs[$coluna['Field']]['label'] .= ($mask!="")? $mask : $coluna['Field'];
 									$inputs[$coluna['Field']]['label'] .= "</label>";
-									$inputs[$coluna['Field']]['input']  = "<input class='form-control default_input' type='password' value='{$registro[$coluna['Field']]}' id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}' placeholder='{$coluna['Field']}'>";
+									$inputs[$coluna['Field']]['input']  = "<input class='form-control default_input' type='password' value='{$registro[$coluna['Field']]}' id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}' placeholder='{$coluna['Field']}'>";
 									break;
 									default:
 									$campo = $registro[$coluna["Field"]];
 									if ($this->Util->isFileInput($coluna['Field'])) {
 										$existe_arquivo = (file_exists("./$this->tableName/uploads/{$registro[$coluna['Field']]}") && $registro[$coluna['Field']]!= null);
+
 									 // ($existe_arquivo == true) ? "sim":"nao";
 										$inputs[$coluna['Field']]['label']  = "<label  for='$this->tableName:{$coluna['Field']}' class='capital'>";
 										$inputs[$coluna['Field']]['label'] .= ($mask!="")? $mask : $coluna['Field'];
 										$inputs[$coluna['Field']]['label'] .= "</label>";
-											$inputs[$coluna["Field"]]['input'] ="";
+										$inputs[$coluna["Field"]]['input'] ="";
 										if ($existe_arquivo){
 											$extensao = strtolower($this->Util->getFileExtension($campo));
 											$inputs[$coluna["Field"]]['input'] .="<div class='text-center'>";
 											if (in_array($extensao, Util::$array_img_extensions)) {
-												$inputs[$coluna["Field"]]['input'] .="<div class='table-central'><div id='voltar_arquivo' ></div><div class='excluir-inset' title='excluir imagem' onclick=\"mostra_input_file_form(this,'$this->tableName','{$coluna['Field']}');\" >&times;</div><img style='max-height:300px; max-width:300px;' src='./admin/$this->tableName/uploads/{$registro[$coluna['Field']]}' alt='img'></div>";
+												$inputs[$coluna["Field"]]['input'] .="<div class='table-central'>
+												<div class='excluir-inset' title='excluir imagem' onclick=\"mostra_input_file_form(this,'$this->tableName','{$coluna['Field']}');\" ><i class='fa fa-fw fa-times text-danger'></i></div><img style='max-height:300px; max-width:300px;' src='./$this->tableName/uploads/{$registro[$coluna['Field']]}' alt='img'></div>";
+												$inputs[$coluna["Field"]]['input'] .="<div id='div_{$this->tableName}_{$coluna['Field']}'";
+												$inputs[$coluna["Field"]]['input'] .= $existe_arquivo==1 ?  "style='display:none'>" : " >";
+												$inputs[$coluna["Field"]]['input'] .="</div>";
 											}else{
 												$inputs[$coluna["Field"]]['input'] .="File : <b><?php echo $campo?></b></div>";
 											}
-										} 
-										$inputs[$coluna["Field"]]['input'] .="<div id='div_{$this->tableName}_{$coluna['Field']}'";
-											if ($existe_arquivo==1)
-												$inputs[$coluna["Field"]]['input'] .= "style='display:none'>";
-											 else 
-												$inputs[$coluna["Field"]]['input'] .= " >";
-												$inputs[$coluna["Field"]]['input'] .= "<input class='form-control default_input' type='file'  id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}' placeholder='{$coluna['Field']}'>";
-											$inputs[$coluna["Field"]]['input'] .="</div>";
+										} else{
+											$inputs[$coluna["Field"]]['input'] .= "<input class='form-control default_input' type='file'  id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}' placeholder='{$coluna['Field']}'>";
+										}
 									} else {
 										$inputs[$coluna["Field"]]['label']  = "<label  for='$this->tableName:{$coluna['Field']}' class='capital'>";
 										$inputs[$coluna['Field']]['label'] .= ($mask!="")? $mask : $coluna['Field'];
 										$inputs[$coluna['Field']]['label'] .= "</label>";
-										$inputs[$coluna['Field']]['input']  = "<input class='form-control default_input' type='text' value='{$registro[$coluna['Field']]}' id='$this->tableName:{$coluna['Field']}' name='$this->tableName:{$coluna['Field']}' placeholder='{$coluna['Field']}'>";
+										$inputs[$coluna['Field']]['input']  = "<input class='form-control default_input' type='text' value='{$registro[$coluna['Field']]}' id='$this->tableName:{$coluna['Field']}' name='{$coluna['Field']}' placeholder='{$coluna['Field']}'>";
 									}
 								}
 							}

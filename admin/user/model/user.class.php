@@ -18,5 +18,16 @@ class user_model extends LoopModel
 		";
 		return $this->runSQL($sql);
 	}
+
+	public function submit_insert($historico=false, $uploaddir = null )
+	{
+		return parent::submit_insert(false,"./user/uploads/");
+	}
+
+	public function submit_update($historico=false,$chave="id",$id = 0, $uploaddir = null)
+	{
+		return parent::submit_update($historico,$chave,$id,'./user/uploads/');
+	}
+
 	
 }

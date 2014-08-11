@@ -30,8 +30,12 @@ function togglePublicado (idForm, publicado) {
 }
 
 function mostra_input_file_form (element,table,field) {
-	$('#div_'+table+'_'+field).show(); 
 	$(element).parent().hide();
+	$('#div_'+table+'_'+field).show(); 
+
+	var input 	 = "<input class='form-control default_input' type='file'  id='"+table+":"+field+"'";
+	input 		+= " name='"+field+"' placeholder='"+field+"'>";
+	$('#div_'+table+'_'+field).html(input); 
 }
 
 function var_dump(obj) {
