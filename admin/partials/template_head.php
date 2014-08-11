@@ -9,6 +9,9 @@
   $this->menu_left = $menu_left_model->getMenu();
 
   $this->printMessage(); 
+  $user_model = new user_model();
+
+  $user = $user_model->getRegistro($_SESSION['admin']['user']['id']); 
   ?>
 
   <div class="menuLeftMobile animated">
@@ -65,8 +68,14 @@
           <h3>
             Project
           </h3>
+            <?php 
+              $file_path = (file_exists("./user/uploads/{$user['img_user']}") && $user['img_user'] != '') ? "./user/uploads/{$user['img_user']}" : "http://hhhhold.com/jpeg/200/d";
+            ?>
+            <div class="CTsidebar-avatar" style="background-image : url(<?php echo $file_path ?>)">
+            </div>
+              <?php echo $_SESSION['admin']['user']['login']?>
+
           <small class='esconde_mobile' id="logout">      
-            Olá <i> <?php echo $_SESSION['admin']['user']['login']?></i>, 
               <?php if ($_SESSION['admin']['user']['last_access'] != null) {?>
                 seu último acesso foi <?php echo $this->Util->dateFormat('d/m/y H:i:s',$_SESSION['admin']['user']['last_access']);?> 
               <?} else {?>

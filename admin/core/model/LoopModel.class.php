@@ -363,12 +363,6 @@ public function update($id,$array_insert,$search_key = 'id')
 		public function submit_update($historico=false,$search_key="id",$id = 0, $uploaddir = null)
 		{		
 			$id = $_POST["upd"];unset($_POST['upd']);
-
-			$update = "UPDATE  $this->table SET ";
-			$values = "";
-			$where = "WHERE $search_key = '$id' ";
-			$control_variables = array("l","sl","upd","id");
-
 			$unchanged_register = $this->getRegistro($id);
 
 			$uploaddir = $uploaddir == null ? "../$this->table/uploads/" : $uploaddir;
@@ -382,7 +376,7 @@ public function update($id,$array_insert,$search_key = 'id')
 						$nome_arquivo = $this->Util->hashNameGenerator().".$extensao";
 						$_POST[$key] = $nome_arquivo;
 					} else {
-						$_POST[$key] = 'NULL';
+						$_POST[$key] = null;
 					}
 					if (file_exists($uploaddir.$unchanged_register[$key])) {
 						unlink($uploaddir.$unchanged_register[$key]);

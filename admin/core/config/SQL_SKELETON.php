@@ -55,6 +55,7 @@ CREATE TABLE '.$schema_name.'.user(
   password varchar( 128 ) ,
   last_access timestamp  DEFAULT NULL,
   fkaccess_level int(11) not null ,
+  img_user varchar(512),
 
   CONSTRAINT fk_level_usuario FOREIGN KEY ( fkaccess_level ) REFERENCES access_level( id ) ON DELETE NO ACTION
 );

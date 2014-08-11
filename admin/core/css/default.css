@@ -209,3 +209,26 @@ header{
     overflow-y:auto;
     overflow-x:hidden;
 }
+.table-central{display: table; border: 1px solid #eee; padding: 10px; position: relative;}
+.table-central i:hover {
+    background-color: white;
+}
+.table-central i {
+    position: absolute; 
+    background-color: #eee;
+    cursor: pointer;
+    top: 0px; 
+    right: 0px;
+    box-shadow: 0 0 1px black; 
+    font-size: 20px; 
+}
+.CTsidebar-avatar{
+    display: table;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 50px;
+    background-size: 100%;
+    width: 100px;
+    height: 100px;
+    background-position: center center;
+}

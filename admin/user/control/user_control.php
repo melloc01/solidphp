@@ -12,7 +12,7 @@ class user_control extends LoopControl
 	public function __construct($tool="_use")
 	{
 		parent::__construct($tool);
-		$this->Form->setMasks(array("fkaccess_level" => "Nível de acesso", 'password' => 'Senha','login' => 'Login'));
+		$this->Form->setMasks(array("fkaccess_level" => "Nível de acesso", 'password' => 'Senha','login' => 'Login', 'img_user' => 'Imagem de Perfil')) ;
 
 	}
 
@@ -42,7 +42,7 @@ class user_control extends LoopControl
 		$this->list_cells = array("{{login}}");	
 
 		$this->no_controls_lista = array(); //inicializa 
-		$this->registros =  $this->Model->getRegistros(" id <> {$_SESSION['admin']['user']['id']} ");
+		$this->registros =  $this->Model->getRegistros(" id <> 1 ");
 
 		$this->setPageTitle("Usuários");
 		$this->render(ADMIN."core/view/lista.php",get_defined_vars());

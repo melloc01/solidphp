@@ -227,10 +227,15 @@
 										$inputs[$coluna["Field"]]['input'] ="";
 										if ($existe_arquivo){
 											$extensao = strtolower($this->Util->getFileExtension($campo));
-											$inputs[$coluna["Field"]]['input'] .="<div class='text-center'>";
+											$inputs[$coluna["Field"]]['input'] .="<div >";
 											if (in_array($extensao, Util::$array_img_extensions)) {
-												$inputs[$coluna["Field"]]['input'] .="<div class='table-central'>
-												<div class='excluir-inset' title='excluir imagem' onclick=\"mostra_input_file_form(this,'$this->tableName','{$coluna['Field']}');\" ><i class='fa fa-fw fa-times text-danger'></i></div><img style='max-height:300px; max-width:300px;' src='./$this->tableName/uploads/{$registro[$coluna['Field']]}' alt='img'></div>";
+												$inputs[$coluna["Field"]]['input'] .="
+												<div class='table-central'>
+													<div class='excluir-inset' title='excluir imagem' onclick=\"mostra_input_file_form(this,'$this->tableName','{$coluna['Field']}');\" >
+														<i class='fa fa-fw fa-times pull-right text-danger'></i>
+													</div>
+													<img style='max-height:300px; max-width:300px;' src='./$this->tableName/uploads/{$registro[$coluna['Field']]}' alt='img'>
+												</div>";
 												$inputs[$coluna["Field"]]['input'] .="<div id='div_{$this->tableName}_{$coluna['Field']}'";
 												$inputs[$coluna["Field"]]['input'] .= $existe_arquivo==1 ?  "style='display:none'>" : " >";
 												$inputs[$coluna["Field"]]['input'] .="</div>";
