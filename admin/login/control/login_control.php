@@ -26,6 +26,7 @@ class login_control extends LoopControl
 
 	public function submit()
 	{
+
 		if (isset($_POST["user"])){
 			if (!$this->auth()) {
 				$this->actionForms = './';
@@ -44,8 +45,6 @@ class login_control extends LoopControl
 		$user_model = new user_model();
 
 		$registro = $user_model->getRegistro($_POST["user"],'login');
-
-		// Kint::dump(!empty($registro) && $this->checkCryptPassword($_POST["pass"],$registro['password']));
 
 		if( !empty($registro) && $this->checkCryptPassword($_POST["pass"],$registro['password']) ){
 			$this->buildSession($registro);

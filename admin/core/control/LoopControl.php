@@ -444,5 +444,13 @@ class LoopControl
 		{
 			return $this->httpRequest->getActionValue();
 		}
+		public function getControllerName()
+		{
+			return $this->httpRequest->getControllerClassName();
+		}
+		public function getActionName()
+		{
+			return $this->httpRequest->getActionName();
+		}
 
 	}
