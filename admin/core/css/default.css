@@ -204,3 +204,8 @@ header{
     font-size: 16px;
     color: white;
 }
+.ajax_news{
+    height: 180px;
+    overflow-y:auto;
+    overflow-x:hidden;
+}

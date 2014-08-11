@@ -1,9 +1,9 @@
 <?php  
 require(ADMIN."core/view/titulo_pagina.php");
 ?>
-<div class="col-sm-12 bs3-panel ">
-	<div class="row" style=" height:500px; overflow:auto;">
-		<div  class="col-sm-12  ">
+<div class="col-sm-12 ctNews ">
+	<div class="row" >
+		<div  class="col-sm-6  ">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Folha de São Paulo </h3>
@@ -13,7 +13,7 @@ require(ADMIN."core/view/titulo_pagina.php");
 				</div>
 			</div>
 		</div>
-		<div  class="col-sm-12  ">
+		<div  class="col-sm-6  ">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">O Estado de São Paulo </h3>
@@ -23,7 +23,7 @@ require(ADMIN."core/view/titulo_pagina.php");
 				</div>
 			</div>
 		</div>
-		<div  class="col-sm-12  ">
+		<div  class="col-sm-6  ">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Época Idéias & Inovações</h3>
@@ -33,7 +33,7 @@ require(ADMIN."core/view/titulo_pagina.php");
 				</div>
 			</div>
 		</div>
-		<div  class="col-sm-12  ">
+		<div  class="col-sm-6  ">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Época Brasil</h3>
