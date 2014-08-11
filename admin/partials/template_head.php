@@ -69,7 +69,7 @@
             Project
           </h3>
             <?php 
-              $file_path = (file_exists("./user/uploads/{$user['img_user']}") && $user['img_user'] != '') ? "./user/uploads/{$user['img_user']}" : "http://hhhhold.com/jpeg/200/d";
+              $file_path = (file_exists("./user/uploads/{$user['img_user']}") && $user['img_user'] != '') ? "./user/uploads/{$user['img_user']}" : "http://www.mycomeup.com/sites/all/themes/mcu/images/user_blank.png";
             ?>
             <div class="CTsidebar-avatar esconde_mobile" style="background-image : url(<?php echo $file_path ?>)"></div>
               <span class='visible-xs'><?php echo $_SESSION['admin']['user']['login']?>  <small style='display:inline !important'> (<a href="./login/logout">sair</a>)</span></small>
