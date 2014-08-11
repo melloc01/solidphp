@@ -53,7 +53,7 @@ CREATE TABLE '.$schema_name.'.user(
   type varchar(32) DEFAULT "admin" ,
   login varchar(128) UNIQUE not null,
   password varchar( 128 ) ,
-  last_access timestamp ,
+  last_access timestamp  DEFAULT NULL,
   fkaccess_level int(11) not null ,
 
   CONSTRAINT fk_level_usuario FOREIGN KEY ( fkaccess_level ) REFERENCES access_level( id ) ON DELETE NO ACTION

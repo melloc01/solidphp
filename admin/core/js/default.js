@@ -8,9 +8,10 @@ var doc_height = Math.max( body.scrollHeight, body.offsetHeight,
 $(".sidebar").css('height',doc_height);
 
 $(document).ready(function() {	
-	getNewsAjax('http://feeds.folha.uol.com.br/emcimadahora/rss091.xml','folhaNews');
-	getNewsAjax('http://estadao.feedsportal.com/c/33043/f/534105/index.rss','estadaoNews');
-	getNewsAjax('http://revistagalileu.globo.com/Revista/Common/Rss/0,,DMI0-17579,00-MATERIAS.xml','galileuNews',10);
+	getNewsAjax('http://feeds.folha.uol.com.br/emcimadahora/rss091.xml','folhaNews',10);
+	getNewsAjax('http://estadao.feedsportal.com/c/33043/f/534105/index.rss','estadaoNews',10);
+	getNewsAjax('http://revistaepoca.globo.com/dyn/Brasil/rss2.xml ','epocaNews',10);
+	getNewsAjax('http://colunas.revistaepocanegocios.globo.com/ideiaseinovacao/feed/','epocaNegociosNews',10);
 });
 
 

@@ -14,7 +14,7 @@
   <div class="menuLeftMobile animated">
     <div class="row">
       <div class="col-sm-12 text-center" >
-        <i style='font-size:25px; color:white; cursor:pointer; margin:15px 15px 0 0' class='fa fa-arrow-circle-o-left pull-right' onclick="$('.menuLeftMobile').css('left','-300px');"></i>
+        <i style='font-size:25px; color:white; cursor:pointer; margin:15px 15px 0 0' class='fa fa-arrow-circle-o-left pull-right' onmouseover="$('.menuLeftMobile').css('left','-300px');"></i>
       </div>
     </div>
     <div class="row">
@@ -65,9 +65,16 @@
           <h3>
             Project
           </h3>
-          <small class='esconde_mobile' id="logout">      Olá <?php echo $_SESSION['admin']['user']['login']?>, seu último acesso foi <?php echo $this->Util->getCurrentDate('d/m/Y \a\s h:i');?> (<a href="./login/logout">sair</a>)
+          <small class='esconde_mobile' id="logout">      
+            Olá <i> <?php echo $_SESSION['admin']['user']['login']?></i>, 
+              <?php if ($_SESSION['admin']['user']['last_access'] != null) {?>
+                seu último acesso foi <?php echo $this->Util->dateFormat('d/m/y H:i:s',$_SESSION['admin']['user']['last_access']);?> 
+              <?} else {?>
+                esse é seu primeiro acesso.
+              <?}?>
+              (<a href="./login/logout">sair</a>)
           </small>
-          <div id="menuToggle" onclick="$('.menuLeftMobile').css('left',0); ">
+          <div id="menuToggle" onmouseover="$('.menuLeftMobile').css('left',0); ">
             <div></div>
             <div></div>
             <div></div>

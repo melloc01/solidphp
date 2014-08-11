@@ -192,7 +192,7 @@
 		*
 		*/
 
-		public function getDate($format ="d/m/Y", $timestamp, $inputFormat='Y-m-d H:i:s')
+		public function dateFormat($format ="d/m/Y", $timestamp, $inputFormat='Y-m-d H:i:s')
 		{
 			try {
 				if ($timestamp==null) {

@@ -391,7 +391,7 @@ public function insert($array_insert)
  *
  *
  */
-public function update($id,$array_insert,$key = 'id')
+public function update($id,$array_insert,$search_key = 'id')
 {
 	$sql_statement = "UPDATE $this->table SET  ";
 	$values_statement = ") VALUES (";
@@ -403,8 +403,8 @@ public function update($id,$array_insert,$key = 'id')
 	}
 	//delete last comas
 	$sql_statement = substr($sql_statement, 0, -1);
-	$sql_statement .= " WHERE $key = '$id' ";
-
+	$sql_statement .= " WHERE $search_key = '$id' ";
+	echo "$sql_statement";
 	return $this->runPDOQuery($sql_statement,$param_array);
 }
 

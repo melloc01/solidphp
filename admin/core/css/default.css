@@ -4,6 +4,7 @@ body,html{
 }
 .sidebar{
     margin-top: -1px !important;
+    width: 100%;
     padding: 15px;
 }
 .ctInputGroup{
@@ -82,7 +83,7 @@ header{
     height: 30px;
     width: 40px;
     position: fixed;
-    top: 15px; left: 15px;
+    top: 25px; left: 25px;
     z-index: 10;
 }
 #menuToggle div{
@@ -117,7 +118,7 @@ header{
         z-index: 100;
     }
     #content{
-        padding-top: 60px;
+        padding-top: 80px;
     }
 }
 @media (min-width: 768px) {
@@ -193,6 +194,8 @@ header{
     z-index: 888;
     box-shadow: 0 0 10px black;
     text-align: center;
+    overflow-y: auto; 
+    overflow-x: hidden; 
 }
 .menuLeftMobile a{
     padding: 20px ;

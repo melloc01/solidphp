@@ -82,7 +82,7 @@
 				/*initializes input fields -- helps Album Tool */
 				$inputs[$coluna['Field']]['label'] = "";
 				$inputs[$coluna['Field']]['input'] = "";
-				$inputs[$coluna['Field']]['hide'] = false;
+				$inputs[$coluna['Field']]['print'] = true;
 
 				if(($coluna["Field"]!="id") && ($coluna['Field']!= "fkAlbum")){
 					$mask = isset($this->custom_inputs[$coluna['Field']]['mask'])? $this->custom_inputs[$coluna['Field']]['mask']: "";
@@ -297,12 +297,12 @@
 			/**
 			*	function hideInput
 			*
-			*	This method hides the inputs , if $this->order is set  it will print in order. 
+			*	This method prints the inputs , if $this->order is set  it will print in order. 
 			*/	
 
 			public function hideInput($field)
 			{
-				$this->inputs[$field]['hide'] = true;
+				$this->inputs[$field]['print'] = false;
 			}
 
 			public function getInputDefaultValues($field,$defaultValues,$existingValue, $type="select")
@@ -348,25 +348,21 @@
 
 				if ($this->custom_inputs != null) {
 					foreach ($this->custom_inputs as $key => $value) {
-						if ($this->inputs[$key]['hide'] == false) {
+						if ($this->inputs[$key]['print'] == true) {
 							echo "<div class='ctInputGroup'>$html_before";
 							echo $this->inputs[$key]['label'];
 							echo (isset($this->custom_inputs[$key]['input']))? $this->custom_inputs[$key]['input'] : $this->inputs[$key]['input'];
 							echo "$html_after </div>";
-						} else {
-							$_input = (isset($this->custom_inputs[$key]['input']))? $this->custom_inputs[$key]['input'] : $this->inputs[$key]['input'] ;
-							echo '<div class="hidden">'.$_input.'</div>';
 						}
 					}
 				} else {
 					foreach ($this->inputs as $key => $input) {
-						if ($this->inputs[$key]['hide'] == false) {
+						if ($this->inputs[$key]['print'] == true) {
 							echo "<div class='ctInputGroup'>$html_before";
 							echo $this->inputs[$key]['label'];
 							echo $this->inputs[$key]['input'];
 							echo "$html_after </div>";
-						} else 
-							echo '<div class="hidden">'.$this->inputs[$key]['input'].'</div>';
+						} 
 					}
 				}
 				// var_dump($this->custom_inputs);

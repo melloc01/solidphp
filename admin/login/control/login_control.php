@@ -72,6 +72,12 @@ class login_control extends LoopControl
 			$access[$tool['code']] = (bool) $tool['has_access'];
 		}
 
+		//updates last_access
+		$update_user = array(
+			'last_access' => date('Y-m-d H:i:s')
+		);
+
+		$bool = $user_model->update($registro['id'],$update_user);
 		$_SESSION['admin']['access'] = $access;
 
 	}
