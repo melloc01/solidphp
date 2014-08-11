@@ -77,7 +77,7 @@
 
           <small class='esconde_mobile' id="logout">      
               <?php if ($_SESSION['admin']['user']['last_access'] != null) {?>
-                seu último acesso foi <?php echo $this->Util->dateFormat('d/m/y H:i:s',$_SESSION['admin']['user']['last_access']);?> 
+                seu último acesso foi <?php echo $this->Util->dateFormat('d/m/y \à\s 1H:i:s',$_SESSION['admin']['user']['last_access']);?> 
               <?} else {?>
                 esse é seu primeiro acesso.
               <?}?>
