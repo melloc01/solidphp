@@ -71,13 +71,13 @@
             <?php 
               $file_path = (file_exists("./user/uploads/{$user['img_user']}") && $user['img_user'] != '') ? "./user/uploads/{$user['img_user']}" : "http://hhhhold.com/jpeg/200/d";
             ?>
-            <div class="CTsidebar-avatar" style="background-image : url(<?php echo $file_path ?>)">
-            </div>
-              <?php echo $_SESSION['admin']['user']['login']?>
+            <div class="CTsidebar-avatar esconde_mobile" style="background-image : url(<?php echo $file_path ?>)"></div>
+              <span class='visible-xs'><?php echo $_SESSION['admin']['user']['login']?>  <small style='display:inline !important'> (<a href="./login/logout">sair</a>)</span></small>
+              <span class='hidden-xs'><?php echo $_SESSION['admin']['user']['login']?>  </small>
 
           <small class='esconde_mobile' id="logout">      
               <?php if ($_SESSION['admin']['user']['last_access'] != null) {?>
-                seu último acesso foi <?php echo $this->Util->dateFormat('d/m/y \à\s 1H:i:s',$_SESSION['admin']['user']['last_access']);?> 
+                seu último acesso foi <?php echo $this->Util->dateFormat('d/m/y \à\s H:i:s',$_SESSION['admin']['user']['last_access']);?> 
               <?} else {?>
                 esse é seu primeiro acesso.
               <?}?>
