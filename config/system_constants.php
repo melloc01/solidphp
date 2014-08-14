@@ -9,14 +9,13 @@
 	define ('ON_PRODUCTION',false);
 		
 
+	define ('BASE_URL','http://'.$_SERVER['HTTP_HOST'].'/'.PROJECT_NAME.'/');
 	if (strpos(getcwd(), 'admin')) {
-		define ('BASE_URL','http://localhost/'.PROJECT_NAME.'/admin/');
 		define("ADMIN", "./");
 		define("ROOT", "../");
 		define("CURRENT_BASE",ADMIN);
 		define("ON_ADMIN",TRUE);
 	} else {
-		define ('BASE_URL','http://localhost/'.PROJECT_NAME.'/');
 		define("ADMIN", "./admin/");
 		define("ROOT", "./");
 		define("CURRENT_BASE",ROOT);

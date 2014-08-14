@@ -1,13 +1,15 @@
+
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>Solid - No Database constants</title>
 	<?php  
 	$aux = explode('/',$_SERVER['REQUEST_URI']);
 	$project = $aux[1];
 	?>
-	<base href='http://localhost/<?php echo $project ?>/' />
-	<link rel="stylesheet" type="text/css" href="plugins/bootstrap/css/bootstrap.min.css">
+	<base href='<?php echo BASE_URL ?>' />
+	<link rel="stylesheet" type="text/css" href="<?php echo ROOT ?>plugins/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
 	<div class="container-fluid">
