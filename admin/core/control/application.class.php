@@ -15,11 +15,13 @@ class Application
 	{
 		$request  = new HttpRequest();
 		if (ON_ADMIN)
-			$request->setBaseUrl('/'.PROJECT_NAME.'/admin/');
+			$request->setBaseUrl('admin/');
 		else 
-			$request->setBaseUrl('/'.PROJECT_NAME.'/');
+			$request->setBaseUrl('');
+
 
 		$this->httpRequest = $request->createRequest();
+		// Kint::dump($this->httpRequest);
 		$this->route();
 
 	}

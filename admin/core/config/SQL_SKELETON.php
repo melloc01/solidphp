@@ -59,6 +59,16 @@ CREATE TABLE '.$schema_name.'.user(
 
   CONSTRAINT fk_level_usuario FOREIGN KEY ( fkaccess_level ) REFERENCES access_level( id ) ON DELETE NO ACTION
 );
+CREATE TABLE '$schema_name'.user(
+  id int(11) not null primary key auto_increment,
+  type varchar(32) default "admin",
+  login varchar(128) UNIQUE not null,
+  password varchar( 128 ) ,
+  last_access timestamp  DEFAULT NULL,
+  fkaccess_level int(11) not null ,
+  img_user varchar(512),
+
+);
 
 
 

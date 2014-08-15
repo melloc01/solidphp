@@ -1,5 +1,5 @@
-<link rel='stylesheet'  href='./__construct/css/__construct.css'>
-<script src='./__construct/js/__construct.js'></script>
+<link rel='stylesheet'  href='/__construct/css/__construct.css'>
+<script src='/__construct/js/__construct.js'></script>
 
 <?php  
 	$this->printMessage();
@@ -60,7 +60,7 @@
 							</div> 
 						<?}
 						else{?>
-							<a  href="./__construct/addToMenuLeft/<?php echo $table ?>"> ADD CRUD to ADMIN left menu  </a>
+							<a  href="./<?php echo $table ?>"> ADD CRUD to ADMIN left menu  </a>
 						<?}?>
 					<?php endif ?>
 			</td>
@@ -87,7 +87,7 @@ function cria_estrutura_admin (element) {
 	var chk_ferramenta 	= document.querySelector('#chk_'+table);
 	var tool 		= document.querySelector("#"+table);
 		$.ajax({
-			url: './__construct/buildAdminStructure',
+			url: '/__construct/buildAdminStructure',
 			type: 'post',
 			dataType: 'html',
 			data: { table:table, createTool : chk_ferramenta.checked, tool:tool.value },
@@ -105,7 +105,7 @@ function cria_estrutura_admin (element) {
 
 function cria_model (element) {
 	var table 			= element.getAttribute('table_name');
-	$.get('./?',{ table:table }, function(data) {
+	$.get('/?',{ table:table }, function(data) {
 		alert(data);
 		location.reload();
 	});
@@ -123,7 +123,7 @@ function cria_ferramenta (element) {
 function cria_estrutura_admin_especial (nome) {
 	var table = nome;
 		$.ajax({
-			url: './__construct/buildStaticAdminStructure',
+			url: './buildStaticAdminStructure',
 			type: 'post',
 			dataType: 'html',
 			data: { table:table, createTool : false },
@@ -143,7 +143,7 @@ function cria_estrutura_admin_especial (nome) {
 function cria_estrutura_root (element) {
 	var table = element.getAttribute('table_name');
 		$.ajax({
-			url: './__construct/buildRootStructure',
+			url: './buildRootStructure',
 			type: 'post',
 			dataType: 'html',
 			data: { table:table },
@@ -163,7 +163,7 @@ function cria_estrutura_root (element) {
 function cria_estrutura_root_especial (nome) {
 	var table = nome;
 		$.ajax({
-			url: './__construct/buildRootStructure',
+			url: './buildRootStructure',
 			type: 'post',
 			dataType: 'html',
 			data: { table:table },

@@ -1,8 +1,7 @@
-<link rel="stylesheet" href="login/css/login.css">
-
-	<?php  
-		$this->printMessage();
-	?>
+<link type="text/css" rel="stylesheet" href="/admin/login/css/login.css">
+<?php  
+	$this->printMessage();
+?>
 <div class="container">
 	<div class="login-container">
 		<div id="output">

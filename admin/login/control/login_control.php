@@ -1,11 +1,4 @@
 <?php
-/**
- * ADMIN CONTROL
- */  
-
-/**
- * ADMIN CONTROL
- */  
 class login_control extends LoopControl
 {
 	public function __construct()
@@ -32,12 +25,17 @@ class login_control extends LoopControl
 				$this->actionForms = './';
 				$_SESSION['system_danger'] = $this->danger_notification;
 			}
+			$this->movePermanently('/admin/');
 		}
 	}
 
 	public function home()
 	{
 		$this->renderPure(ADMIN.'login/view/home.php',get_defined_vars());		
+	}
+	public function login()
+	{
+		$this->home();
 	}
 
 	public function auth()
@@ -48,11 +46,9 @@ class login_control extends LoopControl
 
 		if( !empty($registro) && $this->checkCryptPassword($_POST["pass"],$registro['password']) ){
 			$this->buildSession($registro);
-			$this->movePermanently('../');
 			return true;
 		}
 		else{
-			$this->movePermanently('./');
 			return false;
 		}
 	}

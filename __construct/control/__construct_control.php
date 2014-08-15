@@ -68,7 +68,7 @@ class __construct_control extends LoopControl
 		$schema_name = $_POST['db_name'];
 		$db = Conexao::getInstanceNoDB();
 		$sql = "CREATE SCHEMA `$schema_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci" ;
-		
+
 		$dbStatment = $db->prepare($sql);
 		if ($dbStatment->execute()){
 			$_SESSION['system_success'] = "Database created successfully.";
@@ -78,10 +78,9 @@ class __construct_control extends LoopControl
 		} else {
 			$error = $dbStatment->errorInfo();
 			$_SESSION['mysql_error'] = $error;
-			return false;
 		}
 
-		$this->movePermanently('./');
+		$this->movePermanently('/__construct');
 	}
 
 	public function addToMenuLeft()
@@ -104,7 +103,7 @@ class __construct_control extends LoopControl
 		if ($menul_model->insert($insert_menul)){
 			$_SESSION['system_success'] = "Adicionado ao menu com sucesso";
 		}
-		$this->movePermanently('../');
+		$this->movePermanently('/__construct');
 	}
 
 	public function buildAdminStructure()

@@ -1,5 +1,5 @@
 		<li>
-			<a href="./"><i class="fa fa-dashboard fa-fw"></i> <b><small>Painel Inicial</small></b></a>
+			<a href="/admin/"><i class="fa fa-dashboard fa-fw"></i> <b><small>Painel Inicial</small></b></a>
 		</li>
 
 		<?
@@ -9,7 +9,7 @@
 				if ( $item_menu['fkaccess_tool'] == null || $_SESSION['admin']['access'][$item_menu['code']] ) {
 					?>
 					<li class="item">
-						<a href="<?php echo $item_menu['link']?>" title="<?php echo $item_menu['mask']?>" >
+						<a href="/admin<?php echo $item_menu['link']?>" title="<?php echo $item_menu['mask']?>" >
 							<i class="fa fa-<?php echo ($item_menu['icon']!="")? $item_menu['icon'] : "paperclip" ?> fa-fw"></i> <?php echo $item_menu['mask']?>
 						</a>
 						<?php  if (isset($_GET['l']) && "".$_GET['l']==$item_menu['link']) {echo "<div class='arrow-left'></div>";}?>
@@ -30,7 +30,7 @@
 		<?php   
 		if ($_SESSION['admin']['access']['_use']) {?>
 		<li class=" item<?php if (isset($_GET['l']) && $_GET['l']=="user") {echo "_selected";}?>">
-			<a href="user" title="Configurações">
+			<a href="/admin/user" title="Configurações">
 				<i class="fa fa-users fa-fw"></i> Usuários
 			</a>
 			<?php if (isset($_GET['l']) && $_GET['l']=="user") {echo "<div class='arrow-left'></div>";}?>
@@ -40,7 +40,7 @@
 		<?php   
 		if ($_SESSION['admin']['access']['_his']) {?>
 		<li class=" item<?php if (isset($_GET['l']) && $_GET['l']=="history") {echo "_selected";}?>">
-			<a href="history" title="Configurações">
+			<a href="/admin/history" title="Configurações">
 				<i class="fa fa-save fa-fw"></i> Histórico
 			</a>
 			<?php if (isset($_GET['l']) && $_GET['l']=="history") {echo "<div class='arrow-left'></div>";}?>
@@ -49,7 +49,7 @@
 		?>
 
 		<li class=" item<?php if (isset($_GET['l']) && $_GET['l']=="settings") {echo "_selected";}?>">
-			<a href="settings" title="Configurações">
+			<a href="/admin/settings" title="Configurações">
 				<i class="fa fa-cog fa-fw"></i> Configurações
 			</a>
 			<?php if (isset($_GET['l']) && $_GET['l']=="settings") {echo "<div class='arrow-left'></div>";}?>

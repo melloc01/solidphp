@@ -1,9 +1,11 @@
-<link rel='stylesheet'  href='./__construct/css/__construct.css'>
-<script src='./__construct/js/__construct.js'></script>
+<link rel='stylesheet'  href='/__construct/css/__construct.css'>
+<script src='/__construct/js/__construct.js'></script>
 <div class="container">	
 	<div class="row ctDbNotFound">
-
 		<div class="col-sm-10 col-sm-offset-1 ">
+		<div class="alert alert-danger text-center">
+			<strong>Be careful!</strong> You should create the database on your Database Client or CLI, creating from here will not grant any privileges to your users.
+		</div>
 			<?php $this->printMessage()  ?>
 			<div class="panel panel-warning">
 				<div class="panel-heading">
@@ -13,7 +15,7 @@
 					<div>
 								The schema <b><code><?php echo DB_SCHEMA_NAME ?></code></b> defined  in <code>database_constants.php</code> could not be found on your database. 
 					</div>
-					<form action="./__construct/createSchema" method="post" accept-charset="utf-8">
+					<form action="./createSchema" method="post" accept-charset="utf-8">
 						<input type="hidden" name="create_schema" value="1">
 						<div class="row">
 							<div class="col-sm-6 col-sm-offset-3">
