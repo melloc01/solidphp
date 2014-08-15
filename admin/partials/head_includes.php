@@ -7,3 +7,4 @@
 <script type="text/javascript" src="/core/js/respond.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/plugins/summernote/summernote.css">
 <link rel="stylesheet" type="text/css" href="/plugins/datetimepicker/jquery.datetimepicker.css">
+<?php  $this->injectCSS(); ?>

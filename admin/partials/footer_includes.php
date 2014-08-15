@@ -3,6 +3,7 @@
 <script src="/admin/core/js/default.js" type="text/javascript" charset="utf-8"></script>
 <script src="/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8" ></script>
 <script src="/plugins/summernote/summernote.min.js" type="text/javascript" charset="utf-8"  ></script>
+<?php $this->injectJS() ?>
 <script>
   $('.ckeditor').summernote({
     height: "300px"

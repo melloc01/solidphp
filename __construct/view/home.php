@@ -1,5 +1,3 @@
-<script src='/__construct/js/__construct.js'></script>
-
 <?php  
 	$this->printMessage();
 ?>

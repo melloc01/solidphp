@@ -455,10 +455,19 @@ class LoopControl
 
 		public function injectCSS()
 		{
-			$_controller = $this->getControllerName();
-			$_location =  ON_ADMIN ? 'admin/' : '';
-			if (file_exists("{$_location}{$_controller}/css/{$_controller}.css")) {
-				echo "<link rel='stylesheet' href='$_location/$_controller/css/$_controller.css'>";
+			$_module = $this->getControllerName();
+			$_location =  ON_ADMIN ? '/admin/' : '';
+			if (file_exists("{$_module}/css/{$_module}.css")) {
+				echo "<link rel='stylesheet' href='$_location/$_module/css/$_module.css'>";
+			}
+		}
+
+		public function injectJS()
+		{
+			$_module = $this->getControllerName();
+			$_location =  ON_ADMIN ? '/admin/' : '';
+			if (file_exists("{$_module}/js/{$_module}.js")) {
+				echo "<script src='$_location/$_module/js/$_module.js' type='text/javascript' charset='utf-8' async defer></script>";
 			}
 		}
 

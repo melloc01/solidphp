@@ -12,5 +12,6 @@
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="/plugins/summernote/summernote.css">
 	<link rel="stylesheet" type="text/css" href="/plugins/datetimepicker/jquery.datetimepicker.css">
+	<?php  $this->injectCSS(); ?>
 </head>
 <body>

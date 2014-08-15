@@ -1,9 +1,6 @@
 <?php  
 	require(ADMIN."core/view/titulo_pagina.php");
 ?>
-
-<link rel="stylesheet" type="text/css" href="/admin/settings/css/settings.css">
-
 <div  class="col-md-12">
 
 	<div class="row" style="margin-top:20px;">
