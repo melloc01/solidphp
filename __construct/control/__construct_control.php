@@ -96,7 +96,7 @@ class __construct_control extends LoopControl
 
 		$insert_menul = array(
 				'mask' => $table,
-				'link' => "./$table",
+				'link' => "/$table",
 				'fkaccess_tool' => $ferramentaID
 		);
 

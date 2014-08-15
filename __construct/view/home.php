@@ -57,7 +57,7 @@
 							</div> 
 						<?}
 						else{?>
-							<a  href="./<?php echo $table ?>"> ADD CRUD to ADMIN left menu  </a>
+							<a  href="/__construct/addToMenuLeft/<?php echo $table ?>"> ADD CRUD to ADMIN left menu  </a>
 						<?}?>
 					<?php endif ?>
 			</td>
@@ -96,7 +96,7 @@ function cria_estrutura_admin (element) {
 			console.log("error");
 		})
 		.always(function(data) {
-			console.log("complete");
+			location.reload();
 		});
 }
 
