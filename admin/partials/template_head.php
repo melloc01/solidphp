@@ -72,10 +72,10 @@
               $file_path = "user/uploads/{$user['img_user']}";
               $file_path = (file_exists($file_path) && $user['img_user'] != '') ? $file_path : null;
             ?>
-              <div class="CTsidebar-avatar esconde_mobile" style="background-image : url(<?php echo "/admin/$file_path" ?>)"></div>
             <?php if ($file_path): ?>
+              <div class="CTsidebar-avatar esconde_mobile" style="background-image : url(<?php echo "/admin/$file_path" ?>)"></div>
             <?php else: ?>
-              <!-- <div class="CTsidebar-avatar esconde_mobile" style="background-color:#fff;"></div>               -->
+              <div class="CTsidebar-avatar esconde_mobile" style="background-color:#eee;border:2px solid #888;"></div>              
             <?php endif ?>
               <span class='visible-xs'><?php echo $_SESSION['admin']['user']['login']?>  <small style='display:inline !important'> (<a href="/admin/login/logout">sair</a>)</span></small>
               <span class='hidden-xs'><?php echo $_SESSION['admin']['user']['login']?>  </small>
