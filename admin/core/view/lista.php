@@ -44,7 +44,7 @@
 							<?}
 							?>
 							<?php if (!in_array("editar", $this->no_controls_lista) ){?>
-							<td class="text-center opcaoLista" title="editar <?php echo  $this->httpRequest->getControllerClassName()?>" onclick='window.location="<?php echo $this->httpRequest->getControllerClassName()?>/edit/<?php echo $registro['id']?>"'>
+							<td class="text-center opcaoLista" title="editar <?php echo  $this->httpRequest->getControllerClassName()?>" onclick='window.location="/admin/<?php echo $this->httpRequest->getControllerClassName()?>/edit/<?php echo $registro['id']?>"'>
 								<div >
 									<button type="button" class="btn  btn-info " ><small class="esconde_mobile"><!-- Editar --> </small><i class="fa fa-edit fa-fw"></i></button>
 								</div>
