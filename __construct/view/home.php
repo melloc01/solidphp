@@ -1,4 +1,3 @@
-<link rel='stylesheet'  href='/__construct/css/__construct.css'>
 <script src='/__construct/js/__construct.js'></script>
 
 <?php  

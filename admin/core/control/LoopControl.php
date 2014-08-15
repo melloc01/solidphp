@@ -458,6 +458,7 @@ class LoopControl
 			$_controller = $this->getControllerName();
 			$_location =  ON_ADMIN ? 'admin/' : '';
 			if (file_exists("{$_location}{$_controller}/css/{$_controller}.css")) {
+				echo "<link rel='stylesheet' href='$_location/$_controller/css/$_controller.css'>";
 			}
 		}
 

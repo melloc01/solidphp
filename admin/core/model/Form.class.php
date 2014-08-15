@@ -218,7 +218,7 @@
 									default:
 									$campo = $registro[$coluna["Field"]];
 									if ($this->Util->isFileInput($coluna['Field'])) {
-										$existe_arquivo = (file_exists("./$this->tableName/uploads/{$registro[$coluna['Field']]}") && $registro[$coluna['Field']]!= null);
+										$existe_arquivo = (file_exists("$this->tableName/uploads/{$registro[$coluna['Field']]}") && $registro[$coluna['Field']]!= '');
 
 									 // ($existe_arquivo == true) ? "sim":"nao";
 										$inputs[$coluna['Field']]['label']  = "<label  for='$this->tableName:{$coluna['Field']}' class='capital'>";
@@ -234,7 +234,7 @@
 													<div class='excluir-inset' title='excluir imagem' onclick=\"mostra_input_file_form(this,'$this->tableName','{$coluna['Field']}');\" >
 														<i class='fa fa-fw fa-times pull-right text-danger'></i>
 													</div>
-													<img style='max-height:300px; max-width:300px;' src='./$this->tableName/uploads/{$registro[$coluna['Field']]}' alt='img'>
+													<img style='max-height:300px; max-width:300px;' src='/admin/$this->tableName/uploads/{$registro[$coluna['Field']]}' alt='img'>
 												</div>";
 												$inputs[$coluna["Field"]]['input'] .="<div id='div_{$this->tableName}_{$coluna['Field']}'";
 												$inputs[$coluna["Field"]]['input'] .= $existe_arquivo==1 ?  "style='display:none'>" : " >";

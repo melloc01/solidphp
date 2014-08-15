@@ -69,12 +69,13 @@
             Project
           </h3>
             <?php 
-              $file_path = (file_exists("/user/uploads/{$user['img_user']}") && $user['img_user'] != '') ? "/user/uploads/{$user['img_user']}" : null;
+              $file_path = "user/uploads/{$user['img_user']}";
+              $file_path = (file_exists($file_path) && $user['img_user'] != '') ? $file_path : null;
             ?>
+              <div class="CTsidebar-avatar esconde_mobile" style="background-image : url(<?php echo "/admin/$file_path" ?>)"></div>
             <?php if ($file_path): ?>
-              <div class="CTsidebar-avatar esconde_mobile" style="background-image : url(<?php echo $file_path ?>)"></div>
             <?php else: ?>
-              <div class="CTsidebar-avatar esconde_mobile" style="background-color:#fff;"></div>              
+              <!-- <div class="CTsidebar-avatar esconde_mobile" style="background-color:#fff;"></div>               -->
             <?php endif ?>
               <span class='visible-xs'><?php echo $_SESSION['admin']['user']['login']?>  <small style='display:inline !important'> (<a href="/admin/login/logout">sair</a>)</span></small>
               <span class='hidden-xs'><?php echo $_SESSION['admin']['user']['login']?>  </small>
