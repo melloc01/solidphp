@@ -257,7 +257,10 @@ class '.$table.'_control extends LoopControl
 }';
 
 
-$data_view =' home de '.$table.'';
+$data_view =' <p>
+	Controller &rarr; <code>'.$table.'</code> <br>
+	Action &rarr; <code>home</code>
+</p>';
 
 		mkdir(ADMIN."$table");
 		mkdir(ADMIN."$table/control");
@@ -302,9 +305,11 @@ class '.$table.'_control extends LoopControl
 
 $home =
 "
-<link rel='stylesheet'  href='./$table/css/$table.css'>
-<script src='./$table/js/$table.js'></script>
-home de $table
+<p>
+	Controller &rarr; <code>default</code> <br>
+	Action &rarr; <code>home</code>
+</p>
+
 ";
 
 	file_put_contents(ROOT."$table/control/".$table."_control.php", $data_control);

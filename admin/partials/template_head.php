@@ -42,14 +42,14 @@
   ?>
   <?php   
     if ($_SESSION['admin']['access']['_use']) {?>
-      <a href="./user" title="Configurações">
+      <a href="/admin/user" title="Configurações">
         <i class="fa fa-users fa-fw"></i> Usuários
       </a>
     <?php  }
     ?>
     <?php   
     if ($_SESSION['admin']['access']['_his']) {?>
-      <a href="./history" title="Configurações">
+      <a href="/admin/history" title="Configurações">
         <i class="fa fa-bar-chart-o fa-fw"></i> Histórico
       </a>
     <?php  }
@@ -69,10 +69,14 @@
             Project
           </h3>
             <?php 
-              $file_path = (file_exists("./user/uploads/{$user['img_user']}") && $user['img_user'] != '') ? "./user/uploads/{$user['img_user']}" : "http://www.mycomeup.com/sites/all/themes/mcu/images/user_blank.png";
+              $file_path = (file_exists("/user/uploads/{$user['img_user']}") && $user['img_user'] != '') ? "/user/uploads/{$user['img_user']}" : null;
             ?>
-            <div class="CTsidebar-avatar esconde_mobile" style="background-image : url(<?php echo $file_path ?>)"></div>
-              <span class='visible-xs'><?php echo $_SESSION['admin']['user']['login']?>  <small style='display:inline !important'> (<a href="./login/logout">sair</a>)</span></small>
+            <?php if ($file_path): ?>
+              <div class="CTsidebar-avatar esconde_mobile" style="background-image : url(<?php echo $file_path ?>)"></div>
+            <?php else: ?>
+              <div class="CTsidebar-avatar esconde_mobile" style="background-color:#fff;"></div>              
+            <?php endif ?>
+              <span class='visible-xs'><?php echo $_SESSION['admin']['user']['login']?>  <small style='display:inline !important'> (<a href="/admin/login/logout">sair</a>)</span></small>
               <span class='hidden-xs'><?php echo $_SESSION['admin']['user']['login']?>  </small>
 
           <small class='esconde_mobile' id="logout">      
@@ -81,7 +85,7 @@
               <?} else {?>
                 esse é seu primeiro acesso.
               <?}?>
-              (<a href="./login/logout">sair</a>)
+              (<a href="/admin/login/logout">sair</a>)
           </small>
           <div id="menuToggle" onmouseover="$('.menuLeftMobile').css('left',0); ">
             <div></div>

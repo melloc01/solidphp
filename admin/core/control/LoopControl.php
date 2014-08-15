@@ -453,4 +453,12 @@ class LoopControl
 			return $this->httpRequest->getActionName();
 		}
 
+		public function injectCSS()
+		{
+			$_controller = $this->getControllerName();
+			$_location =  ON_ADMIN ? 'admin/' : '';
+			if (file_exists("{$_location}{$_controller}/css/{$_controller}.css")) {
+			}
+		}
+
 	}

@@ -7,8 +7,8 @@
 </head>
 <body>
 <div class="container">
-<header id="header" class="awesomeHeader">
-	<div class="alert alert-success">
-		<strong>Success ! I'm the header</strong> 
-	</div>
-</header><!-- /header -->
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2 text-center">
+			<header id="header" class="awesomeHeader">
+				<h1>Welcome to Solid </h1>
+			</header><!-- /header -->		
