@@ -55,7 +55,7 @@ class user_control extends LoopControl
 		$id = $this->httpRequest->getActionValue();
 		$registro = $this->Model->getRegistro($id);
 
-		$this->setPageTitle("Editar user");
+		$this->setPageTitle("Editar Usuário");
 		$this->Form->setInputs($registro);
 		$this->Form->hideInput("last_access");
 		$this->Form->hideInput("type");
