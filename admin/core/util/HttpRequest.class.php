@@ -141,14 +141,13 @@ class HttpRequest
         if (!isset($uriParts[$this->actionkey])) {
             return $this;
         }
-        $this->actionName = $this->formatControllerName($uriParts[$this->actionkey]);
+        $this->actionName = $this->formatActionName($uriParts[$this->actionkey]);
         
         if (!isset($uriParts[$this->actionvaluekey])) {
             return $this;
         }
 
-        $this->actionValue = $this->formatControllerName($uriParts[$this->actionvaluekey]);
-        
+        $this->actionValue = $this->formatActionValueName($uriParts[$this->actionvaluekey]);
 
         // remove controller/action/actionvalue name from uri
         unset($uriParts[$this->controllerkey]);

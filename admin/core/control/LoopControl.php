@@ -121,21 +121,21 @@ class LoopControl
 
 		}
 
-		public function modifyURL($var, $value)
-		{
-			output_add_rewrite_var($var, $value);
-		}
-
-		public function setSiteTitle($value = null)
+		/**
+		 * 		function setSiteTitle
+		 * 			Sets the browser title 
+		 * 
+		 */
+		public function setSiteTitle($_title = null)
 		{
 			$_class = $this->getClassName();
-			if ($value == null) 
+			if ($_title == null) 
 				if ($_class == 'default')
-						if(ON_ADMIN)  $value =  "Solid - Control Panel ";
-					else $value = "Solid";
+						if(ON_ADMIN)  $_title =  "Solid - Control Panel ";
+					else $_title = "Solid";
 				else 
-					$value = "Solid - ".ucfirst($_class);
-			$this->site_title = $value;
+					$_title = "Solid - ".ucfirst($_class);
+			$this->site_title = $_title;
 		}
 
 		public function getSiteTitle()
@@ -167,7 +167,9 @@ class LoopControl
 		/**
 		 * function system_requires 
 		 *			requires a basic set of system classes and instantiate Util
+		 *		
 		 *			called by : init()
+		 *			
 		 */
 		public function system_requires()
 		{
@@ -180,17 +182,6 @@ class LoopControl
 			// require ADMIN.'./core/model/RSSParser.class.php';
 			// require ADMIN.'./core/model/News.class.php'		;
 			$this->Util = new Util();
-		}
-
-		/**
-		 * function addModuleCSS - add Current CSS File at the Top
-		 *
-		 *	@param string array $models_array
-		 *	
-		 */
-		public function getModuleCSS()
-		{
-			return $this->getClassName();			
 		}
 
 
@@ -210,31 +201,15 @@ class LoopControl
 			if (ON_ADMIN)
 				$this->Form = new Form($this->getClassName());
 			$this->system_requires();
-			$this->redirectURL = $this->getFullurl();		
 			$this->setNotifications();
 			$this->setSiteTitle();
 		}
 
 		/**
-		 *  function getActionFormvValues()
-		 *
-		 *	This function returns the url that all action forms go ( it keeps _GET value of the URL )
-		 *
-		*/
-		public function getFullurl()
-		{	
-			if (isset($_GET) && ($_GET != null)) {
-				$_GET_keys = array_keys($_GET);
-				$first_key = $_GET_keys[0];
-				$url = "./?";
-				foreach ($_GET as $key => $value) {
-					$url .= ($key != $first_key)?"&$key=$value": "$key=$value";
-				}
-				return $url;
-			} 
-			return "";
-		}
-
+		 * 		function setNotifications()
+		 *			Set default system notifications ( user feedbacks )
+		 *			
+		 */
 		public function setNotifications($value='')
 		{
 			$this->success_notification = "Registro criado com succeso.";	
@@ -247,19 +222,21 @@ class LoopControl
 		}
 
 
-		public function requireModel($classe, $parent ="")
-		{
-			if ($parent=="") {
-				require (ADMIN."$classe/model/$classe.class.php");
-			} else {
-				require (ADMIN."$parent/model/$classe.class.php");
-			}
-		}
 
+		/**
+		 * 		function setPageTitle()
+		 *			@param String $new_title
+		 *			
+		 */
 		public function setPageTitle($new_title){
 			$this->titulo = $new_title;
 		}
 
+
+		/**
+		 * 		function include_footer()
+		 *		requires the current header partial
+		 */
 		public function include_head()
 		{
 			if ($this->hasHeader) {
@@ -268,12 +245,12 @@ class LoopControl
 				include_once(CURRENT_BASE."partials/HTML_head_includes.php");
 			}
 		}
-
-		public function getVars()
-		{
-			return get_defined_vars();
-		}
 		
+
+		/**
+		 * 		function include_footer()
+		 *		requires the current footer partial
+		 */
 		public function include_footer()
 		{
 			if ($this->hasFooter) {
@@ -283,14 +260,12 @@ class LoopControl
 			}
 		}
 
-
-
-
 		/**
 		 * 		function checkCryptPassword()
 		 *
 		 *		@param $password
 		 *		@param $crypted_password
+		 *		@return bool true if match
 		 *
 		 */
 		public function checkCryptPassword($password, $crypted_password)
@@ -298,6 +273,11 @@ class LoopControl
 			return (crypt($password, $crypted_password) == $crypted_password);
 		}
 
+		/**
+		 * 		function route()
+		 *		routes the application
+		 * 
+		 */
 		public function route()
 		{
 			$action = $this->httpRequest->getActionName();
@@ -309,6 +289,15 @@ class LoopControl
 				$this->renderPure(CURRENT_BASE.'core/view/404.html',get_defined_vars());
 			}	
 		}
+
+		/**
+		 * 	
+		 * 		function render()		 	
+		 * 			@param String $file_location : 	path of the .php file
+		 * 			@param Object $defined_vars : 	vars of the context it was called
+		 * 			@param bool $renderPartials :  	If false the function will only render it's output, nothing else
+		 * 											- Useful for APIs
+		 */
 
 		public function render($file_location, $defined_vars = null, $renderPartials = true)
 		{
@@ -335,29 +324,19 @@ class LoopControl
 				$this->include_footer();
 			}
 		}
-
-		
-		public function renderPartial($file_location, $defined_vars)
-		{
-			if (is_array($defined_vars)) 
-				foreach ( $defined_vars as $name => $value)
-					$$name = $value;
-
-			require $file_location;
-		}
 		
 		/**
-		 *  renderPure () - no vars
+		*  	function renderPure ()
+		*		calls runder w/o context application **PARTIALS**
+		*
+		*		IT DOES INCLUDES ALL HTML DOCTYPE/METAS AND OTHER STUFF RELATED TO HTML SYNTAX AND FUNCTIONALITY 
+		*
 		*/
 		public function renderPure($file_location, $defined_vars)
 		{
-			if (is_array($defined_vars)) 
-				foreach ( $defined_vars as $name => $value)
-					$$name = $value;
-
 			$this->hasHeader = false;
 			$this->hasFooter = false;
-			$this->render($file_location,get_defined_vars());
+			$this->render($file_location,$defined_vars);
 		}
 
 
@@ -372,7 +351,12 @@ class LoopControl
 			}
 		}
 
-
+		/**
+		 * 	
+		 * 		function submit()
+		 * 			This function takes care of all the CRUD doing automatically on /admin, be careful on changes if needed.
+		 * 	
+		 */
 		public function submit()
 		{
 			if (isset($_POST["ins"])){
@@ -408,6 +392,13 @@ class LoopControl
 			}
 		}
 
+		/**
+		 * 
+		 * 		function getClassName
+		 * 			@example calledby : post_control
+		 * 			@return  post
+		 * 
+		 */
 		public function getClassName()
 		{
 			$aux = explode("_control", get_class($this));
@@ -415,8 +406,15 @@ class LoopControl
 		}
 
 
+		/**
+		 * 		function hasAccess($tool)
+		 * 			@param String $tool : check the $_SESSION object for the table  ACCESS  value.
+		 * 
+		 */
 		public function hasAccess($tool)
 		{
+			if ($tool = '') return true;
+
 			if (isset($_SESSION['admin']['access'][$tool])) {
 				if ($_SESSION['admin']['access'][$tool])
 					return true;
@@ -424,22 +422,44 @@ class LoopControl
 			return false;
 		}
 
+		/**
+		 * 		function movePermanently()
+		 *			@param String $link
+		 *			301 redirect
+		 *
+		 */
 		public function movePermanently($link)
 		{
 			header("Location: $link");
 			exit;
 		}
 
+
+		/**
+		 *	 	function setAccessError()
+		 *			Sets the message user will receive when he attempt to access some restricted-area controller.
+		 *
+		 *
+		 */
 		public function setAccessError()
 		{
 			$_SESSION['system_warning'] = "Voc&ecirc; n&atilde;o tem permiss&atilde;o para acessar esta ferramenta.";
 		}
 
+		/**
+		 * 		function printMessage
+		 *			print error/feedback messages
+		 *
+		 */
 		public function printMessage()
 		{
 			require ADMIN.'core/view/system_messages.php';
 		}
 
+		/**
+		 * 		Getters
+		 * 
+		 */
 		public function getActionValue()
 		{
 			return $this->httpRequest->getActionValue();
@@ -453,6 +473,12 @@ class LoopControl
 			return $this->httpRequest->getActionName();
 		}
 
+		/**
+		 * 		function injectCSS
+		 * 			Injects the controllers css on the current scope
+		 * 			TO DO : ON_PRODUCTION constant to get styles.min.css - minified and concat'd
+		 * 
+		 */
 		public function injectCSS()
 		{
 			$_module = $this->getControllerName();
@@ -462,6 +488,12 @@ class LoopControl
 			}
 		}
 
+		/**
+		 * 		function injectJS
+		 * 			Injects the controllers js on the current scope
+		 * 			TO DO : ON_PRODUCTION constant to get scripts.min.js - minified and concat'd
+		 * 
+		 */
 		public function injectJS()
 		{
 			$_module = $this->getControllerName();

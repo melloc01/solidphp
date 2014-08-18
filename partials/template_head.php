@@ -11,4 +11,4 @@
 		<div class="col-sm-8 col-sm-offset-2 text-center">
 			<header id="header" class="awesomeHeader">
 				<h1>Welcome to Solid </h1>
-			</header><!-- /header -->		
+			</header>
