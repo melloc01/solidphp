@@ -101,7 +101,9 @@ class LoopControl
 		* 	@param FontAwesome class Icon : 
 		*
 	    */	
-		$icon = 'fa-paperclip';
+		$icon = 'fa-paperclip',
+
+		$renderPartials = true;
 
 
 
@@ -286,8 +288,56 @@ class LoopControl
 				$this->$action();
 			}
 			else{
-				$this->renderPure(CURRENT_BASE.'core/view/404.html',get_defined_vars());
+				$this->_404(get_defined_vars());
 			}	
+		}
+
+		public function _404($defined_vars)
+		{
+			$this->renderPure(CURRENT_BASE.'core/view/404.html',$defined_vars);
+		}
+
+		/**
+		 * 	function asyncRequest 
+		 * 		Why ?
+		 *		 - Doing ajax request for big lists or accessing some API can be handled inside a controller and you'll be able to do async with this method.
+		 *		
+		 * 		@param String $actionName
+		 * 			Controller's method name
+		 * 	
+		 * 		@example 
+		 *			jQuery AJAX Example : ( if on admin don't forget to prepend /admin to the 'url' )
+		 *		
+		 *			$.ajax({
+		 *					url: '/controllerName/asyncRequest/actionName/partials/true',
+		 *					type: 'POST',
+		 *					dataType: 'html',
+		 *					data: {id: '1' },
+		 *				})
+		 *				.done(function(data) {
+		 *					console.log("success");
+		 *					$('body').append(data); //show your data
+		 *				})
+		 *				.fail(function() {
+		 *					console.log("error");
+		 *					$('body').append(data); //probably internet problems, so an alert or an already given 'hidden' error message should be displayed.
+		 *				});
+		 * 				URL examples :
+		 * 					'/controllerName/asyncRequest/actionName/' >> partials = false
+		 * 					'/controllerName/asyncRequest/actionName/partials/true'
+		 * 					'/controllerName/asyncRequest/actionName/partials/false'
+		 * 	
+		 */
+		public function asyncRequest($actionName = null, $partials = false)
+		{
+			$actionName  = $actionName == null ? $this->getActionValue() : $actionName;
+			$params = $this->httpRequest->getParameters();
+			$this->renderPartials = isset($params['partials']) ? $params['partials'] == 'true' ? true : false : $partials;
+
+			if (method_exists($this, $actionName))
+				$this->$actionName();
+			else
+				$this->_404(get_defined_vars());
 		}
 
 		/**
@@ -295,14 +345,13 @@ class LoopControl
 		 * 		function render()		 	
 		 * 			@param String $file_location : 	path of the .php file
 		 * 			@param Object $defined_vars : 	vars of the context it was called
-		 * 			@param bool $renderPartials :  	If false the function will only render it's output, nothing else
 		 * 											- Useful for APIs
 		 */
 
-		public function render($file_location, $defined_vars = null, $renderPartials = true)
+		public function render($file_location, $defined_vars = null )
 		{
 			$_defined_vars = $defined_vars;
-			if ($renderPartials) {
+			if ($this->renderPartials) {
 				if (is_array($defined_vars)) 
 					foreach ( $defined_vars as $name => $value)
 						$$name = $value;
@@ -316,7 +365,7 @@ class LoopControl
 
 			require $file_location;
 
-			if ($renderPartials) {
+			if ($this->renderPartials) {
 				if (is_array($_defined_vars)) 
 					foreach ( $_defined_vars as $name => $value)
 						$$name = $value;
@@ -413,8 +462,6 @@ class LoopControl
 		 */
 		public function hasAccess($tool)
 		{
-			if ($tool = '') return true;
-
 			if (isset($_SESSION['admin']['access'][$tool])) {
 				if ($_SESSION['admin']['access'][$tool])
 					return true;
