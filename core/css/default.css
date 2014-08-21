@@ -44,9 +44,6 @@ body,html{
 		left: 0;
 		width:350px;
 	}
-	#content{
-		margin-left: 350px;
-	}
 	#menuToggle{
 		display: none;
 	}
@@ -67,9 +64,7 @@ body,html{
 	#menuToggle{
 		display: block;
 	}
-	#content{
-		margin-top: 81px;
-	}
+	
 }
 @media (max-width:768px){
 	
@@ -87,15 +82,6 @@ body,html{
 	}
 }
 
-.border{
-	border: 1px solid black;
-}
-.text-muted{
-	color: #999;
-}
-.text-center{
-	text-align: center;
-}
 
 .transitions{
 	-webkit-transition: all .25s ;

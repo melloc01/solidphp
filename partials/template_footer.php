@@ -5,5 +5,6 @@
 </div>
 </div>
 
+<?php require ROOT.'partials/footer_includes.php' ?>
 </body>
 </html>
