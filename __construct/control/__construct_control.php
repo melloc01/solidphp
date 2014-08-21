@@ -22,119 +22,121 @@ class __construct_control extends LoopControl
 				foreach ($_tables as $key => $table) 
 					if (!in_array($table[0], $this->system_tables)) 
 						array_push($this->db_tables, $table[0]);
-				$this->setSiteTitle('Solid - __construct ');
-				$this->render(ROOT."__construct/view/home.php",get_defined_vars());
-				
+					$this->setSiteTitle('Solid - __construct ');
+					$this->render(ROOT."__construct/view/home.php",get_defined_vars());
+					
+				} catch (Exception $e) {
+					$this->noDatabase();
+				}
+
+			}
+		}
+
+		public function testDatabase()
+		{
+			try {
+				$test = new access_model();
+
+				if ( $test->table == 'no_db' ){
+					$this->noDatabase();
+					return false;
+				}
+				else 
+					return true;
+
 			} catch (Exception $e) {
-				$this->noDatabase();
-			}
-
-		}
-	}
-
-	public function testDatabase()
-	{
-		try {
-			$test = new access_model();
-
-			if ( $test->table == 'no_db' ){
-				$this->noDatabase();
-				return false;
-			}
-			else 
-				return true;
-
-		} catch (Exception $e) {
-			switch ($e->getCode()) {
-				case 1044:
-				$this->accessDenied();
-				return false;
-				break;
-				default:
-				throw new Exception($e, 1);
-				break;
+				switch ($e->getCode()) {
+					case 1044:
+					$this->accessDenied();
+					return false;
+					break;
+					default:
+					throw new Exception($e, 1);
+					break;
+				}
 			}
 		}
-	}
 
-	public function noDatabase()
-	{
+		public function noDatabase()
+		{
 
-		$this->render(ROOT.'__construct/view/no_database.php',get_defined_vars());
-	}
-
-	public function createSchema()
-	{
-		$schema_name = $_POST['db_name'];
-		$db = Conexao::getInstanceNoDB();
-		$sql = "CREATE SCHEMA `$schema_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci" ;
-
-		$dbStatment = $db->prepare($sql);
-		if ($dbStatment->execute()){
-			$_SESSION['system_success'] = "Database created successfully.";
-			require ADMIN.'core/config/SQL_SKELETON.php';
-			$dbStatment = $db->prepare($sql_base);
-			$dbStatment->execute();
-		} else {
-			$error = $dbStatment->errorInfo();
-			$_SESSION['mysql_error'] = $error;
+			$this->render(ROOT.'__construct/view/no_database.php',get_defined_vars());
 		}
 
-		$this->movePermanently('/__construct');
-	}
+		public function createSchema()
+		{
+			$schema_name = $_POST['db_name'];
+			$db = Conexao::getInstanceNoDB();
+			$sql = "CREATE SCHEMA `$schema_name` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci" ;
 
-	public function addToMenuLeft()
-	{
-		$table = $this->httpRequest->getActionValue();
-		$access_model = new access_model();
-		$access_tool_model = new access_tool_model();
-		$menul_model = new menul_model();
+			$dbStatment = $db->prepare($sql);
+			if ($dbStatment->execute()){
+				$_SESSION['system_success'] = "Database created successfully.";
+				require ADMIN.'core/config/SQL_SKELETON.php';
+				$dbStatment = $db->prepare($sql_base);
+				$dbStatment->execute();
+			} else {
+				$error = $dbStatment->errorInfo();
+				$_SESSION['mysql_error'] = $error;
+			}
 
-		$linha = $access_tool_model->getRegistro("$table",'table_name');
+			$this->movePermanently('/__construct');
+		}
 
-		$ferramentaID = $linha['id'];
+		public function addToMenuLeft()
+		{
+			$table = $this->httpRequest->getActionValue();
+			$access_model = new access_model();
+			$access_tool_model = new access_tool_model();
+			$menul_model = new menul_model();
 
-		$insert_menul = array(
+			$linha = $access_tool_model->getRegistro("$table",'table_name');
+
+			$ferramentaID = $linha['id'];
+
+			$insert_menul = array(
 				'mask' => $table,
 				'link' => "/$table",
 				'fkaccess_tool' => $ferramentaID
-		);
+				);
 
-		if ($menul_model->insert($insert_menul)){
-			$_SESSION['system_success'] = "Adicionado ao menu com sucesso";
+			if ($menul_model->insert($insert_menul)){
+				$_SESSION['system_success'] = "Adicionado ao menu com sucesso";
+			}
+			$this->movePermanently('/__construct');
 		}
-		$this->movePermanently('/__construct');
-	}
+		public function buildAdminStructure()
+		{
+			$access_model = new access_model();
+			$access_tool_model = new access_tool_model();
 
-	public function buildAdminStructure()
-	{
-		$access_model = new access_model();
-		$access_tool_model = new access_tool_model();
-
-		$table = $_POST['table'];
-		$_success = true;	
-		$ferramenta = isset($_POST['tool'])? $_POST['tool']:"";
-		
-		if ($_POST['createTool'] == 'true' && $ferramenta != '') {
-
-			$insert_access_tool = array(
-				'name' => $table,
-				'code' => $ferramenta,
-				'table_name' => $table,
-				'description' => "Permissão para Cadastrar/Alterar/Remover cadastros de {$table}s. "
-			);
-
-			$access_model->startTransaction();
-			$_success &= $access_tool_model->insert($insert_access_tool);
-			$ferramenta_id = $access_tool_model->getLastInsertId();
-
-			$insert_access = array(
-				'fkaccess_level' => 1,
-				'fkaccess_tool' => $ferramenta_id
-			);
-
-			$_success &= $access_model->insert($insert_access);
+			$table = $_POST['table'];
+			$_success = true;	
+			$ferramenta = isset($_POST['tool'])? $_POST['tool']:"";
 			
+			$access_model->startTransaction();
+			if ($_POST['createTool'] == 'true' && $ferramenta != '') {
+
+				$insert_access_tool = array(
+					'name' => $table,
+					'code' => $ferramenta,
+					'table_name' => $table,
+					'description' => "Permissão para Cadastrar/Alterar/Remover cadastros de {$table}s. "
+					);
+
+
+				$ferramenta_id = $access_tool_model->insert($insert_access_tool);
+				$_success &= $ferramenta_id >0;
+				
+				$insert_access = array(
+					'fkaccess_level' => 1,
+					'fkaccess_tool' => $ferramenta_id
+					);
+
+				$last_id = $access_model->insert($insert_access);
+				$_success &= $last_id >0;
+				
+			}
 			if ($_success) {
 				$access_model->commit();
 				mkdir(ADMIN."$table");
@@ -147,33 +149,31 @@ class __construct_control extends LoopControl
 			}
 			else
 				$access_model->rollback();
-				
-		}
 
-		if ($_POST['createTool'] == 'true' ) {
-			$colunas = $access_model->runSQL("SHOW COLUMNS FROM  $table ");
-			$mask_list = $colunas[1]['Field'];
-		} else {
-			$mask_list = $table;
-		}
+			if ($_POST['createTool'] == 'true' ) {
+				$colunas = $access_model->runSQL("SHOW COLUMNS FROM  $table ");
+				$mask_list = $colunas[1]['Field'];
+			} else {
+				$mask_list = $table;
+			}
 			$data_control = '<?php
 
-class '.$table.'_control extends LoopControl
-{
-	public 	$registros,
-			$Form, 
-			$Model, 
-			$no_controls_lista,
-			$list_headers,
-			$list_cells;
+			class '.$table.'_control extends LoopControl
+			{
+				public 	$registros,
+				$Form, 
+				$Model, 
+				$no_controls_lista,
+				$list_headers,
+				$list_cells;
 
-	public function __construct($tool="'.$ferramenta.'")
-	{
-		parent::__construct($tool);
-	}
+				public function __construct($tool="'.$ferramenta.'")
+				{
+					parent::__construct($tool);
+				}
 
-	public function home()
-	{		
+				public function home()
+				{		
 		// $this->Form->setInputOrder(array("column1","column2"));
 		// $this->Form->setRotuloFk("fkuser","name");
 		// $this->Form->setMasks(array("title" => "Title"));
@@ -181,86 +181,86 @@ class '.$table.'_control extends LoopControl
 		// $this->Form->setDefaultValues("field",array("optionValue" => "optionMask","optionValue"=> "optionMask"));
 
 
-		$this->list_headers = array("'.$mask_list.'");
-		$this->list_cells = array("{{'.$mask_list.'}}");	
+					$this->list_headers = array("'.$mask_list.'");
+					$this->list_cells = array("{{'.$mask_list.'}}");	
 
-		$this->no_controls_lista = array(); //inicializa 
-		$this->registros =  $this->Model->getRegistros();
+					$this->no_controls_lista = array(); //inicializa 
+					$this->registros =  $this->Model->getRegistros();
 
-		$this->setPageTitle("'.$table.'s");
-		$this->render(ADMIN."core/view/lista.php",get_defined_vars());
+					$this->setPageTitle("'.$table.'s");
+					$this->render(ADMIN."core/view/lista.php",get_defined_vars());
 
-	}
-
-
-	public function edit()
-	{
-		$id = $this->httpRequest->getActionValue();
-		$registro = $this->Model->getRegistro($id);
-		$this->setPageTitle("Editar '.$table.'");
-		$this->Form->setInputs($registro);
-
-		$this->render(ADMIN."core/view/editar.php",get_defined_vars());
-	}
-
-	public function create()
-	{
-		$this->setPageTitle("Novo '.$table.'");
-		$this->Form->setInputs();
-		$this->render(ADMIN."core/view/novo.php",get_defined_vars());
-	}
-}';
+				}
 
 
-$data_model ='<?php
-class '.$table.'_model extends LoopModel
-{
+				public function edit()
+				{
+					$id = $this->httpRequest->getActionValue();
+					$registro = $this->Model->getRegistro($id);
+					$this->setPageTitle("Editar '.$table.'");
+					$this->Form->setInputs($registro);
 
-	function __construct()
-	{
-		parent::__construct();
-	}
-}';
+					$this->render(ADMIN."core/view/editar.php",get_defined_vars());
+				}
 
-	if ($_success) {
-		if ($_POST['createTool'] == 'true') {
-			file_put_contents(ADMIN."$table/model/$table.class.php", $data_model);
-		} else {
-			mkdir(ADMIN."$table");
-			mkdir(ADMIN."$table/control");
+				public function create()
+				{
+					$this->setPageTitle("Novo '.$table.'");
+					$this->Form->setInputs();
+					$this->render(ADMIN."core/view/novo.php",get_defined_vars());
+				}
+			}';
+
+
+			$data_model ='<?php
+			class '.$table.'_model extends LoopModel
+			{
+
+				function __construct()
+				{
+					parent::__construct();
+				}
+			}';
+
+			if ($_success) {
+				if ($_POST['createTool'] == 'true') {
+					file_put_contents(ADMIN."$table/model/$table.class.php", $data_model);
+				} else {
+					mkdir(ADMIN."$table");
+					mkdir(ADMIN."$table/control");
+				}
+				file_put_contents(ADMIN."$table/control/".$table."_control.php", $data_control);
+				file_put_contents(ADMIN."$table/css/".$table.".css",'');
+				file_put_contents(ADMIN."$table/js/".$table.".js",'');
+			}
+
+			$this->movePermanently('./');
 		}
-		file_put_contents(ADMIN."$table/control/".$table."_control.php", $data_control);
-		file_put_contents(ADMIN."$table/css/".$table.".css",'');
-		file_put_contents(ADMIN."$table/js/".$table.".js",'');
-	}
 
-	$this->movePermanently('./');
-	}
+		public function buildStaticAdminStructure()
+		{
+			$table = $_POST['table'];
+			$data_control = '<?php
+			class '.$table.'_control extends LoopControl
+			{
+				public function __construct($tool="'.$ferramenta.'")
+				{
+					parent::__construct($tool);
+				}
 
-	public function buildStaticAdminStructure()
-	{
-		$table = $_POST['table'];
-		$data_control = '<?php
-class '.$table.'_control extends LoopControl
-{
-	public function __construct($tool="'.$ferramenta.'")
-	{
-		parent::__construct($tool);
-	}
-
-	public function home()
-	{	
-		$this->render(ADMIN."'.$table.'/view/home.php");	
-	}
+				public function home()
+				{	
+					$this->render(ADMIN."'.$table.'/view/home.php");	
+				}
 
 
-}';
+			}';
 
 
-$data_view =' <p>
-	Controller &rarr; <code>'.$table.'</code> <br>
-	Action &rarr; <code>home</code>
-</p>';
+			$data_view =' <p>
+			Controller &rarr; <code>'.$table.'</code> <br>
+			Action &rarr; <code>home</code>
+		</p>';
 
 		mkdir(ADMIN."$table");
 		mkdir(ADMIN."$table/control");
@@ -272,7 +272,7 @@ $data_view =' <p>
 		file_put_contents(ADMIN."$table/js/".$table.".js", '');
 		file_put_contents(ADMIN."$table/view/home.php", $data_view);
 
-	$this->movePermanently('./');
+		$this->movePermanently('./');
 	}
 
 	public function buildRootStructure()
@@ -289,33 +289,33 @@ $data_view =' <p>
 		mkdir(ROOT."$table/js");
 
 
-	$data_control = '<?php
-class '.$table.'_control extends LoopControl
-{
-	function __construct()
-	{
-		parent::__construct();
-	}
+		$data_control = '<?php
+		class '.$table.'_control extends LoopControl
+		{
+			function __construct()
+			{
+				parent::__construct();
+			}
 
-	public function home()
-	{
-		$this->render(ROOT."'.$table.'/view/home.php", get_defined_vars());
-	}
-}';
+			public function home()
+			{
+				$this->render(ROOT."'.$table.'/view/home.php", get_defined_vars());
+			}
+		}';
 
-$home =
-"
-<p>
-	Controller &rarr; <code>default</code> <br>
-	Action &rarr; <code>home</code>
-</p>
+		$home =
+		"
+		<p>
+			Controller &rarr; <code>default</code> <br>
+			Action &rarr; <code>home</code>
+		</p>
 
-";
+		";
 
-	file_put_contents(ROOT."$table/control/".$table."_control.php", $data_control);
-	file_put_contents(ROOT."$table/css/$table.css","");
-	file_put_contents(ROOT."$table/js/$table.js","");
-	file_put_contents(ROOT."$table/view/home.php",$home);
+		file_put_contents(ROOT."$table/control/".$table."_control.php", $data_control);
+		file_put_contents(ROOT."$table/css/$table.css","");
+		file_put_contents(ROOT."$table/js/$table.js","");
+		file_put_contents(ROOT."$table/view/home.php",$home);
 
 	}
 
