@@ -32,6 +32,8 @@ class default_control extends LoopControl
 
 	public function oitenta($value='')
 	{
+		$this->renderPartials = false;
+		$this->render(ROOT."default/view/home.php",get_defined_vars());
 	}
 
 }

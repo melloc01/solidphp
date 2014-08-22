@@ -25,38 +25,54 @@ var Client = {
 		$( window ).resize(function() {
 			// Client.setFullHeight();
 		});
-		$("[data-event='request']").click(function(event) {
+		
+
+		$("[data-event='ajax-request-loader']").click(function(event) {
 			event.preventDefault();
-			Client.asyncUriRequest(this);
+			Client.ajaxLoadContent(this);
 		});
 	},
 
 	moodifyURLHash : function(value) {
-		location.hash = "#"+value;
+		location.hash = value;
 	},
 
 	processAjaxData : function(response, urlPath){
-		document.getElementById("mainContent").innerHTML = response.html; //html to be injected inside the CONTENT ( not reloading partials )
-		document.title = response.pageTitle; //browser title
+		$("body").html(response.html); //html to be injected inside the CONTENT ( not reloading partials )
 		History.pushState({"html":response.html,"pageTitle":response.pageTitle},"", urlPath); //window.history - History.js plugin for cross-browser compatibility
+		document.title = response.pageTitle; //browser title
+ 	},
+
+ 	ajaxLoadContent: function (element) {
+ 		var loaderElement = document.getElementById(element.getAttribute('data-loader')); //expects #id
+ 		if (loaderElement == undefined) { alert('loaderElement not defined');};
+	 		Client.asyncUriRequest(element,function(data) {
+	 			loaderElement.innerHTML = data;
+	 		});
  	},
 
 
- 	asyncUriRequest : function(element){
+ 	ajaxRequest : function(element){
+ 		Client.asyncUriRequest(element,function(data) {
+ 			console.log(data);
+ 		})
+ 	},
+
+ 	asyncUriRequest : function(element,callback){
  		var uri = element.getAttribute('data-href');
  		$.ajax({
  			url: uri,
  			dataType: 'html'
  		})
  		.done(function(data) {
- 			var response = [];
- 			response.pageTitle = element.getAttribute('data-title');
- 			response.html = data;
- 			Client.processAjaxData(response,uri);
+ 			callback(data);
  		})
- 		.fail(function() {
+ 		.fail(function(data) {
+ 			console.log('error');
+ 			callback(data);
  		})
- 		.always(function() {
+ 		.always(function(data) {
+ 			callback(data);
  		});
  		
  	}

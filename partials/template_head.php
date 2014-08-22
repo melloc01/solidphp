@@ -11,7 +11,7 @@
 		<div class="col-sm-8 col-sm-offset-2 text-center">
 			<header id="header" class="awesomeHeader">
 				<h1>Welcome to Solid 
-				<a data-event="request" data-href="/__construct/home/" href="#" data-title="Contrutor legal" >ata</a>
+				<a data-event="ajax-request-loader" data-href="/default/oitenta/" data-loader="mainContent" href="#" data-title="Contrutor legal" >ata</a>
 				</h1>
 			</header>
 		</div>
