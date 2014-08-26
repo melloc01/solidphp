@@ -1,7 +1,10 @@
-		<li>
-			<a href="/admin/"><i class="fa fa-dashboard fa-fw"></i> <b><small>Painel Inicial</small></b></a>
-		</li>
 
+      <li class="option">
+        <a href="/admin" class="active">
+          <i class="ion-android-earth"></i> 
+          <span>Painel Inicial</span>
+        </a>
+      </li>
 		<?
 		
 		if ($this->menu_left) {

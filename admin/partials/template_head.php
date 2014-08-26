@@ -26,82 +26,79 @@
       </div>
     </div>
     <?
-      if ($this->menu_left) {
-          foreach ($this->menu_left  as $key => $item_menu){
-            if ( $item_menu['fkaccess_tool'] == null || $_SESSION['admin']['access'][$item_menu['code']] ) {
-              ?>
-                <div>
-                  <a href="<?php echo $item_menu['link']?>" title="<?php echo $item_menu['mask']?>" >
-                    <i class="fa fa-<?php echo ($item_menu['icon']!="")? $item_menu['icon'] : "paperclip" ?> fa-fw"></i> <?php echo $item_menu['mask']?>
-                  </a>
-                </div>
-              <?php 
-            } 
-          }
-        }
-  ?>
-  <?php   
+    if ($this->menu_left) {
+      foreach ($this->menu_left  as $key => $item_menu){
+        if ( $item_menu['fkaccess_tool'] == null || $_SESSION['admin']['access'][$item_menu['code']] ) {
+          ?>
+          <div>
+            <a href="<?php echo $item_menu['link']?>" title="<?php echo $item_menu['mask']?>" >
+              <i class="fa fa-<?php echo ($item_menu['icon']!="")? $item_menu['icon'] : "paperclip" ?> fa-fw"></i> <?php echo $item_menu['mask']?>
+            </a>
+          </div>
+          <?php 
+        } 
+      }
+    }
+    ?>
+    <?php   
     if ($_SESSION['admin']['access']['_use']) {?>
-      <a href="/admin/user" title="Configurações">
-        <i class="fa fa-users fa-fw"></i> Usuários
-      </a>
+    <a href="/admin/user" title="Configurações">
+      <i class="fa fa-users fa-fw"></i> Usuários
+    </a>
     <?php  }
     ?>
     <?php   
     if ($_SESSION['admin']['access']['_his']) {?>
-      <a href="/admin/history" title="Configurações">
-        <i class="fa fa-bar-chart-o fa-fw"></i> Histórico
-      </a>
+    <a href="/admin/history" title="Configurações">
+      <i class="fa fa-bar-chart-o fa-fw"></i> Histórico
+    </a>
     <?php  }
     ?>
   </div>
 
   <div class="container-fluid">
-   <div class="row">
-     <div class="col-sm-12">
-     </div>
-   </div>
-   <div class="row">
-    <div class="col-sm-4 col-md-3 ctSidebar text-center">
-    <div class='sidebar'>
-        <div >
-          <h3>
-            Project
-          </h3>
+    
+    <div id="menuToggle" onmouseover="$('.menuLeftMobile').css('left',0); ">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div> 
+    <div class="row">
+      <div class="col-sm-4 col-md-3 ctSidebar text-center">
+        <div class='sidebar'>
+          <div >
+            <h3>
+              Project
+            </h3>
             <?php 
-              $file_path = "user/uploads/{$user['img_user']}";
-              $file_path = (file_exists($file_path) && $user['img_user'] != '') ? $file_path : null;
+            $file_path = "user/uploads/{$user['img_user']}";
+            $file_path = (file_exists($file_path) && $user['img_user'] != '') ? $file_path : null;
             ?>
             <?php if ($file_path): ?>
               <div class="CTsidebar-avatar esconde_mobile" style="background-image : url(<?php echo "/admin/$file_path" ?>)"></div>
             <?php else: ?>
               <div class="CTsidebar-avatar esconde_mobile" style="background-color:#eee;border:2px solid #888;"></div>              
             <?php endif ?>
-              <span class='visible-xs'><?php echo $_SESSION['admin']['user']['login']?>  <small style='display:inline !important'> (<a href="/admin/login/logout">sair</a>)</span></small>
-              <span class='hidden-xs'><?php echo $_SESSION['admin']['user']['login']?>  </small>
+            <span class='visible-xs'><?php echo $_SESSION['admin']['user']['login']?>  <small style='display:inline !important'> (<a href="/admin/login/logout">sair</a>)</span></small>
+            <span class='hidden-xs'><?php echo $_SESSION['admin']['user']['login']?>  </small>
 
-          <small class='esconde_mobile' id="logout">      
-              <?php if ($_SESSION['admin']['user']['last_access'] != null) {?>
+              <small class='esconde_mobile' id="logout">      
+                <?php if ($_SESSION['admin']['user']['last_access'] != null) {?>
                 seu último acesso foi <?php echo $this->Util->dateFormat('d/m/y \à\s H:i:s',$_SESSION['admin']['user']['last_access']);?> 
-              <?} else {?>
+                <?} else {?>
                 esse é seu primeiro acesso.
-              <?}?>
-              (<a href="/admin/login/logout">sair</a>)
-          </small>
-          <div id="menuToggle" onmouseover="$('.menuLeftMobile').css('left',0); ">
-            <div></div>
-            <div></div>
-            <div></div>
-          </div> 
-          <nav id="menu" class='row' >
-            <ul>
-              <?php  
-              require ADMIN.'core/view/menu_left.php'; 
-              ?>
-            </ul>
-          </nav>
-        </div> 
+                <?}?>
+                (<a href="/admin/login/logout">sair</a>)
+              </small>
+              <nav id="menu" class='row' >
+                <ul>
+                  <?php  
+                  require ADMIN.'core/view/menu_left.php'; 
+                  ?>
+                </ul>
+              </nav>
+            </div> 
 
-      </div>
-    </div>
-    <div id="content" class="col-sm-8 col-md-9">
+          </div>
+        </div>
+        <div id="content" class="col-sm-8 col-md-9">
